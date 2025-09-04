@@ -366,7 +366,7 @@ const Documents = () => {
                   </div>
                   
                   {/* Quick filter buttons */}
-                  <div className="mt-3">
+                  {/* <div className="mt-3">
                     <button 
                       className="btn btn-success btn-sm me-2"
                       onClick={() => updateFilters({ ...documentFilters, status: 'completed', page: 1 })}
@@ -379,13 +379,13 @@ const Documents = () => {
                     >
                       <i className="bi bi-clock me-1"></i>Show Partial
                     </button>
-                    {/* <button 
+                    <button 
                       className="btn btn-info btn-sm"
                       onClick={() => updateFilters({ ...documentFilters, year: '1943', page: 1 })}
                     >
                       <i className="bi bi-calendar me-1"></i>1943 (Most Completed)
-                    </button> */}
-                  </div>
+                    </button>
+                  </div> */}
                 </div>
               </div>
             </div>
