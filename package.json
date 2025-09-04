@@ -1,0 +1,29 @@
+{
+  "name": "mab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scan": "node transcription-manager.js scan",
+    "list": "node transcription-manager.js list",
+    "transcribe": "node transcription-manager.js transcribe",
+    "server": "node api-server.js",
+    "dev": "nodemon api-server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@google/genai": "^1.16.0",
+    "better-sqlite3": "^12.2.0",
+    "cookie-session": "^2.1.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "knex": "^3.1.0",
+    "nodemon": "^3.1.10",
+    "openai": "^5.18.1",
+    "sqlite3": "^5.1.7"
+  }
+}

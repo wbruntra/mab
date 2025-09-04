@@ -1,0 +1,863 @@
+[2025-09-04T07:39:42.988Z] 🚀 Background transcriber initialized successfully
+[2025-09-04T07:39:42.988Z] 📊 Using service: openai
+[2025-09-04T07:39:42.989Z] 📦 Batch size: 20
+[2025-09-04T07:39:42.989Z] ⏱️  Delay between batches: 30s
+[2025-09-04T07:39:42.989Z] ⏱️  Delay between files: 6s
+[2025-09-04T07:39:42.989Z] 🎬 Starting background transcription service
+[2025-09-04T07:39:42.992Z] 📈 Initial statistics:
+[2025-09-04T07:39:42.992Z]    Total files: 730
+[2025-09-04T07:39:42.992Z]    Pending: 250
+[2025-09-04T07:39:42.992Z]    Completed: 455
+[2025-09-04T07:39:42.992Z]    Failed: 16
+[2025-09-04T07:39:42.992Z] 
+🚀 Starting batch #1
+[2025-09-04T07:39:42.992Z] 🔍 Looking for 20 pending files...
+[2025-09-04T07:39:42.994Z] 📋 Found 20 pending files to process
+[2025-09-04T07:39:42.994Z] 📄 Processing 1/20: MAR_wartime_letters_440425 part 3
+[2025-09-04T07:40:06.049Z] ✅ Success: 681 characters transcribed
+[2025-09-04T07:40:06.050Z] 📊 Session progress: 1 total (1 success, 0 failed)
+[2025-09-04T07:40:06.050Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:40:12.051Z] 📄 Processing 2/20: MAR_wartime_letters_440426 part 1
+[2025-09-04T07:40:41.681Z] ✅ Success: 1914 characters transcribed
+[2025-09-04T07:40:41.681Z] 📊 Session progress: 2 total (2 success, 0 failed)
+[2025-09-04T07:40:41.681Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:40:47.681Z] 📄 Processing 3/20: MAR_wartime_letters_440504 part 1
+[2025-09-04T07:41:31.877Z] ✅ Success: 2289 characters transcribed
+[2025-09-04T07:41:31.877Z] 📊 Session progress: 3 total (3 success, 0 failed)
+[2025-09-04T07:41:31.877Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:41:37.878Z] 📄 Processing 4/20: MAR_wartime_letters_440506 part 1
+[2025-09-04T07:41:52.327Z] ✅ Success: 523 characters transcribed
+[2025-09-04T07:41:52.327Z] 📊 Session progress: 4 total (4 success, 0 failed)
+[2025-09-04T07:41:52.327Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:41:58.326Z] 📄 Processing 5/20: MAR_wartime_letters_440506 part 2
+[2025-09-04T07:42:15.270Z] ✅ Success: 558 characters transcribed
+[2025-09-04T07:42:15.270Z] 📊 Session progress: 5 total (5 success, 0 failed)
+[2025-09-04T07:42:15.270Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:42:21.270Z] 📄 Processing 6/20: MAR_wartime_letters_440506 part 3
+[2025-09-04T07:42:33.045Z] ✅ Success: 484 characters transcribed
+[2025-09-04T07:42:33.045Z] 📊 Session progress: 6 total (6 success, 0 failed)
+[2025-09-04T07:42:33.045Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:42:39.046Z] 📄 Processing 7/20: MAR_wartime_letters_440506 part 4
+[2025-09-04T07:42:51.927Z] ✅ Success: 233 characters transcribed
+[2025-09-04T07:42:51.927Z] 📊 Session progress: 7 total (7 success, 0 failed)
+[2025-09-04T07:42:51.927Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:42:57.928Z] 📄 Processing 8/20: MAR_wartime_letters_440514 part 1
+[2025-09-04T07:43:26.539Z] ✅ Success: 2304 characters transcribed
+[2025-09-04T07:43:26.539Z] 📊 Session progress: 8 total (8 success, 0 failed)
+[2025-09-04T07:43:26.539Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:43:32.539Z] 📄 Processing 9/20: MAR_wartime_letters_440514 part 2
+[2025-09-04T07:44:09.119Z] ✅ Success: 1120 characters transcribed
+[2025-09-04T07:44:09.119Z] 📊 Session progress: 9 total (9 success, 0 failed)
+[2025-09-04T07:44:09.120Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:44:15.120Z] 📄 Processing 10/20: MAR_wartime_letters_440514 part 3
+[2025-09-04T07:44:29.908Z] ✅ Success: 408 characters transcribed
+[2025-09-04T07:44:29.908Z] 📊 Session progress: 10 total (10 success, 0 failed)
+[2025-09-04T07:44:29.908Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:44:35.909Z] 📄 Processing 11/20: MAR_wartime_letters_440606 part 1
+[2025-09-04T07:44:53.578Z] ✅ Success: 1074 characters transcribed
+[2025-09-04T07:44:53.578Z] 📊 Session progress: 11 total (11 success, 0 failed)
+[2025-09-04T07:44:53.578Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:44:59.579Z] 📄 Processing 12/20: MAR_wartime_letters_440606 part 2
+[2025-09-04T07:45:33.319Z] ✅ Success: 1060 characters transcribed
+[2025-09-04T07:45:33.319Z] 📊 Session progress: 12 total (12 success, 0 failed)
+[2025-09-04T07:45:33.319Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:45:39.319Z] 📄 Processing 13/20: MAR_wartime_letters_440606 part 3
+[2025-09-04T07:45:53.998Z] ✅ Success: 383 characters transcribed
+[2025-09-04T07:45:53.998Z] 📊 Session progress: 13 total (13 success, 0 failed)
+[2025-09-04T07:45:53.998Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:45:59.999Z] 📄 Processing 14/20: MAR_wartime_letters_440609 part 1
+[2025-09-04T07:46:23.281Z] ✅ Success: 959 characters transcribed
+[2025-09-04T07:46:23.281Z] 📊 Session progress: 14 total (14 success, 0 failed)
+[2025-09-04T07:46:23.282Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:46:29.282Z] 📄 Processing 15/20: MAR_wartime_letters_440609 part 2
+[2025-09-04T07:46:45.398Z] ✅ Success: 219 characters transcribed
+[2025-09-04T07:46:45.398Z] 📊 Session progress: 15 total (15 success, 0 failed)
+[2025-09-04T07:46:45.398Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:46:51.398Z] 📄 Processing 16/20: MAR_wartime_letters_440616 part 1
+[2025-09-04T07:47:15.969Z] ✅ Success: 1040 characters transcribed
+[2025-09-04T07:47:15.969Z] 📊 Session progress: 16 total (16 success, 0 failed)
+[2025-09-04T07:47:15.969Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:47:21.969Z] 📄 Processing 17/20: MAR_wartime_letters_440616 part 2
+[2025-09-04T07:47:53.410Z] ✅ Success: 1073 characters transcribed
+[2025-09-04T07:47:53.410Z] 📊 Session progress: 17 total (17 success, 0 failed)
+[2025-09-04T07:47:53.410Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:47:59.411Z] 📄 Processing 18/20: MAR_wartime_letters_440616 part 3
+[2025-09-04T07:48:30.255Z] ✅ Success: 1108 characters transcribed
+[2025-09-04T07:48:30.256Z] 📊 Session progress: 18 total (18 success, 0 failed)
+[2025-09-04T07:48:30.256Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:48:36.256Z] 📄 Processing 19/20: MAR_wartime_letters_440616 part 4
+[2025-09-04T07:49:04.663Z] ✅ Success: 668 characters transcribed
+[2025-09-04T07:49:04.663Z] 📊 Session progress: 19 total (19 success, 0 failed)
+[2025-09-04T07:49:04.663Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:49:10.664Z] 📄 Processing 20/20: MAR_wartime_letters_440617 part 1
+[2025-09-04T07:49:48.492Z] ✅ Success: 937 characters transcribed
+[2025-09-04T07:49:48.492Z] 📊 Session progress: 20 total (20 success, 0 failed)
+[2025-09-04T07:49:48.492Z] 🎯 Batch complete: 20 successful, 0 failed
+[2025-09-04T07:49:48.492Z] ✅ Batch #1 completed
+[2025-09-04T07:49:48.494Z] 📈 Current statistics: 475 completed, 230 pending, 16 failed
+[2025-09-04T07:49:48.494Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T07:50:18.494Z] 
+🚀 Starting batch #2
+[2025-09-04T07:50:18.495Z] 🔍 Looking for 20 pending files...
+[2025-09-04T07:50:18.496Z] 📋 Found 20 pending files to process
+[2025-09-04T07:50:18.497Z] 📄 Processing 1/20: MAR_wartime_letters_440627 part 1
+[2025-09-04T07:50:42.490Z] ✅ Success: 1012 characters transcribed
+[2025-09-04T07:50:42.490Z] 📊 Session progress: 21 total (21 success, 0 failed)
+[2025-09-04T07:50:42.490Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:50:48.491Z] 📄 Processing 2/20: MAR_wartime_letters_440627 part 2
+[2025-09-04T07:51:22.703Z] ✅ Success: 984 characters transcribed
+[2025-09-04T07:51:22.703Z] 📊 Session progress: 22 total (22 success, 0 failed)
+[2025-09-04T07:51:22.703Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:51:28.704Z] 📄 Processing 3/20: MAR_wartime_letters_440627 part 3
+[2025-09-04T07:51:48.514Z] ✅ Success: 634 characters transcribed
+[2025-09-04T07:51:48.514Z] 📊 Session progress: 23 total (23 success, 0 failed)
+[2025-09-04T07:51:48.514Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:51:54.514Z] 📄 Processing 4/20: MAR_wartime_letters_440704 part 1
+[2025-09-04T07:53:19.645Z] ✅ Success: 8599 characters transcribed
+[2025-09-04T07:53:19.645Z] 📊 Session progress: 24 total (24 success, 0 failed)
+[2025-09-04T07:53:19.645Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:53:25.646Z] 📄 Processing 5/20: MAR_wartime_letters_440704 part 2
+[2025-09-04T07:54:04.581Z] ✅ Success: 960 characters transcribed
+[2025-09-04T07:54:04.581Z] 📊 Session progress: 25 total (25 success, 0 failed)
+[2025-09-04T07:54:04.581Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:54:10.582Z] 📄 Processing 6/20: MAR_wartime_letters_440704 part 3
+[2025-09-04T07:54:32.782Z] ✅ Success: 424 characters transcribed
+[2025-09-04T07:54:32.782Z] 📊 Session progress: 26 total (26 success, 0 failed)
+[2025-09-04T07:54:32.782Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:54:38.783Z] 📄 Processing 7/20: MAR_wartime_letters_440709 part 1
+[2025-09-04T07:55:06.159Z] ✅ Success: 1971 characters transcribed
+[2025-09-04T07:55:06.159Z] 📊 Session progress: 27 total (27 success, 0 failed)
+[2025-09-04T07:55:06.159Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:55:12.160Z] 📄 Processing 8/20: MAR_wartime_letters_440710 part 1
+[2025-09-04T07:55:37.988Z] ✅ Success: 766 characters transcribed
+[2025-09-04T07:55:37.988Z] 📊 Session progress: 28 total (28 success, 0 failed)
+[2025-09-04T07:55:37.988Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:55:43.988Z] 📄 Processing 9/20: MAR_wartime_letters_440711 part 1
+[2025-09-04T07:56:11.163Z] ✅ Success: 1077 characters transcribed
+[2025-09-04T07:56:11.163Z] 📊 Session progress: 29 total (29 success, 0 failed)
+[2025-09-04T07:56:11.163Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:56:17.164Z] 📄 Processing 10/20: MAR_wartime_letters_440711 part 2
+[2025-09-04T07:56:46.600Z] ✅ Success: 723 characters transcribed
+[2025-09-04T07:56:46.600Z] 📊 Session progress: 30 total (30 success, 0 failed)
+[2025-09-04T07:56:46.600Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:56:52.601Z] 📄 Processing 11/20: MAR_wartime_letters_440718 part 1
+[2025-09-04T07:57:36.558Z] ✅ Success: 1180 characters transcribed
+[2025-09-04T07:57:36.558Z] 📊 Session progress: 31 total (31 success, 0 failed)
+[2025-09-04T07:57:36.558Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:57:42.558Z] 📄 Processing 12/20: MAR_wartime_letters_440718 part 2
+[2025-09-04T07:58:10.785Z] ✅ Success: 415 characters transcribed
+[2025-09-04T07:58:10.785Z] 📊 Session progress: 32 total (32 success, 0 failed)
+[2025-09-04T07:58:10.785Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:58:16.785Z] 📄 Processing 13/20: MAR_wartime_letters_440810 part 1
+[2025-09-04T07:58:47.873Z] ✅ Success: 2646 characters transcribed
+[2025-09-04T07:58:47.873Z] 📊 Session progress: 33 total (33 success, 0 failed)
+[2025-09-04T07:58:47.874Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:58:53.873Z] 📄 Processing 14/20: MAR_wartime_letters_440810 part 2
+[2025-09-04T07:59:12.646Z] ✅ Success: 619 characters transcribed
+[2025-09-04T07:59:12.646Z] 📊 Session progress: 34 total (34 success, 0 failed)
+[2025-09-04T07:59:12.646Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:59:18.647Z] 📄 Processing 15/20: MAR_wartime_letters_440814 part 1
+[2025-09-04T07:59:47.228Z] ✅ Success: 1699 characters transcribed
+[2025-09-04T07:59:47.228Z] 📊 Session progress: 35 total (35 success, 0 failed)
+[2025-09-04T07:59:47.229Z] ⏳ Waiting 6s before next file...
+[2025-09-04T07:59:53.228Z] 📄 Processing 16/20: MAR_wartime_letters_440815 part 1
+[2025-09-04T08:00:39.044Z] ✅ Success: 1800 characters transcribed
+[2025-09-04T08:00:39.044Z] 📊 Session progress: 36 total (36 success, 0 failed)
+[2025-09-04T08:00:39.044Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:00:45.045Z] 📄 Processing 17/20: MAR_wartime_letters_440815 part 2
+[2025-09-04T08:01:08.745Z] ✅ Success: 785 characters transcribed
+[2025-09-04T08:01:08.746Z] 📊 Session progress: 37 total (37 success, 0 failed)
+[2025-09-04T08:01:08.746Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:01:14.746Z] 📄 Processing 18/20: MAR_wartime_letters_440817 part 1
+[2025-09-04T08:01:33.325Z] ✅ Success: 1339 characters transcribed
+[2025-09-04T08:01:33.326Z] 📊 Session progress: 38 total (38 success, 0 failed)
+[2025-09-04T08:01:33.326Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:01:39.326Z] 📄 Processing 19/20: MAR_wartime_letters_440818 part 1
+[2025-09-04T08:02:00.630Z] ✅ Success: 1139 characters transcribed
+[2025-09-04T08:02:00.631Z] 📊 Session progress: 39 total (39 success, 0 failed)
+[2025-09-04T08:02:00.631Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:02:06.630Z] 📄 Processing 20/20: MAR_wartime_letters_440822 part 1
+[2025-09-04T08:02:36.097Z] ✅ Success: 692 characters transcribed
+[2025-09-04T08:02:36.097Z] 📊 Session progress: 40 total (40 success, 0 failed)
+[2025-09-04T08:02:36.098Z] 🎯 Batch complete: 20 successful, 0 failed
+[2025-09-04T08:02:36.098Z] ✅ Batch #2 completed
+[2025-09-04T08:02:36.099Z] 📈 Current statistics: 495 completed, 210 pending, 16 failed
+[2025-09-04T08:02:36.099Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T08:03:06.099Z] 
+🚀 Starting batch #3
+[2025-09-04T08:03:06.099Z] 🔍 Looking for 20 pending files...
+[2025-09-04T08:03:06.101Z] 📋 Found 20 pending files to process
+[2025-09-04T08:03:06.101Z] 📄 Processing 1/20: MAR_wartime_letters_440921 part 1
+[2025-09-04T08:03:33.025Z] ✅ Success: 1004 characters transcribed
+[2025-09-04T08:03:33.025Z] 📊 Session progress: 41 total (41 success, 0 failed)
+[2025-09-04T08:03:33.025Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:03:39.026Z] 📄 Processing 2/20: MAR_wartime_letters_440921 part 2
+[2025-09-04T08:03:57.194Z] ✅ Success: 314 characters transcribed
+[2025-09-04T08:03:57.194Z] 📊 Session progress: 42 total (42 success, 0 failed)
+[2025-09-04T08:03:57.194Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:04:03.194Z] 📄 Processing 3/20: MAR_wartime_letters_440929 part 1
+[2025-09-04T08:04:27.293Z] ✅ Success: 1089 characters transcribed
+[2025-09-04T08:04:27.293Z] 📊 Session progress: 43 total (43 success, 0 failed)
+[2025-09-04T08:04:27.293Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:04:33.293Z] 📄 Processing 4/20: MAR_wartime_letters_440929 part 2
+[2025-09-04T08:04:55.151Z] ✅ Success: 716 characters transcribed
+[2025-09-04T08:04:55.151Z] 📊 Session progress: 44 total (44 success, 0 failed)
+[2025-09-04T08:04:55.151Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:05:01.153Z] 📄 Processing 5/20: MAR_wartime_letters_441002 part 1
+[2025-09-04T08:05:26.205Z] ✅ Success: 867 characters transcribed
+[2025-09-04T08:05:26.205Z] 📊 Session progress: 45 total (45 success, 0 failed)
+[2025-09-04T08:05:26.205Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:05:32.206Z] 📄 Processing 6/20: MAR_wartime_letters_441002 part 2
+[2025-09-04T08:05:53.933Z] ✅ Success: 877 characters transcribed
+[2025-09-04T08:05:53.934Z] 📊 Session progress: 46 total (46 success, 0 failed)
+[2025-09-04T08:05:53.934Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:05:59.935Z] 📄 Processing 7/20: MAR_wartime_letters_441002 part 3
+[2025-09-04T08:06:24.377Z] ✅ Success: 940 characters transcribed
+[2025-09-04T08:06:24.377Z] 📊 Session progress: 47 total (47 success, 0 failed)
+[2025-09-04T08:06:24.377Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:06:30.378Z] 📄 Processing 8/20: MAR_wartime_letters_441002 part 4
+[2025-09-04T08:06:52.741Z] ✅ Success: 1047 characters transcribed
+[2025-09-04T08:06:52.741Z] 📊 Session progress: 48 total (48 success, 0 failed)
+[2025-09-04T08:06:52.741Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:06:58.742Z] 📄 Processing 9/20: MAR_wartime_letters_441002 part 5
+[2025-09-04T08:07:21.381Z] ✅ Success: 485 characters transcribed
+[2025-09-04T08:07:21.381Z] 📊 Session progress: 49 total (49 success, 0 failed)
+[2025-09-04T08:07:21.381Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:07:27.381Z] 📄 Processing 10/20: MAR_wartime_letters_441002 part 6
+[2025-09-04T08:07:58.994Z] ✅ Success: 562 characters transcribed
+[2025-09-04T08:07:58.995Z] 📊 Session progress: 50 total (50 success, 0 failed)
+[2025-09-04T08:07:58.995Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:08:04.996Z] 📄 Processing 11/20: MAR_wartime_letters_441002 part 7
+[2025-09-04T08:08:38.590Z] ✅ Success: 481 characters transcribed
+[2025-09-04T08:08:38.591Z] 📊 Session progress: 51 total (51 success, 0 failed)
+[2025-09-04T08:08:38.591Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:08:44.591Z] 📄 Processing 12/20: MAR_wartime_letters_441002 part 8
+[2025-09-04T08:09:01.938Z] ✅ Success: 487 characters transcribed
+[2025-09-04T08:09:01.938Z] 📊 Session progress: 52 total (52 success, 0 failed)
+[2025-09-04T08:09:01.938Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:09:07.939Z] 📄 Processing 13/20: MAR_wartime_letters_441004 part 1
+[2025-09-04T08:09:28.352Z] ✅ Success: 1020 characters transcribed
+[2025-09-04T08:09:28.352Z] 📊 Session progress: 53 total (53 success, 0 failed)
+[2025-09-04T08:09:28.353Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:09:34.352Z] 📄 Processing 14/20: MAR_wartime_letters_441004 part 2
+[2025-09-04T08:09:50.063Z] ✅ Success: 236 characters transcribed
+[2025-09-04T08:09:50.063Z] 📊 Session progress: 54 total (54 success, 0 failed)
+[2025-09-04T08:09:50.063Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:09:56.064Z] 📄 Processing 15/20: MAR_wartime_letters_441016 part 1
+[2025-09-04T08:10:38.404Z] ✅ Success: 2434 characters transcribed
+[2025-09-04T08:10:38.404Z] 📊 Session progress: 55 total (55 success, 0 failed)
+[2025-09-04T08:10:38.404Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:10:44.404Z] 📄 Processing 16/20: MAR_wartime_letters_441016 part 2
+[2025-09-04T08:11:01.330Z] ✅ Success: 1038 characters transcribed
+[2025-09-04T08:11:01.330Z] 📊 Session progress: 56 total (56 success, 0 failed)
+[2025-09-04T08:11:01.331Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:11:07.330Z] 📄 Processing 17/20: MAR_wartime_letters_441025 part 1
+[2025-09-04T08:11:23.859Z] ✅ Success: 818 characters transcribed
+[2025-09-04T08:11:23.860Z] 📊 Session progress: 57 total (57 success, 0 failed)
+[2025-09-04T08:11:23.860Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:11:29.860Z] 📄 Processing 18/20: MAR_wartime_letters_441101 part 1
+[2025-09-04T08:11:49.061Z] ✅ Success: 1057 characters transcribed
+[2025-09-04T08:11:49.061Z] 📊 Session progress: 58 total (58 success, 0 failed)
+[2025-09-04T08:11:49.062Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:11:55.062Z] 📄 Processing 19/20: MAR_wartime_letters_441101 part 2
+[2025-09-04T08:12:12.411Z] ✅ Success: 740 characters transcribed
+[2025-09-04T08:12:12.411Z] 📊 Session progress: 59 total (59 success, 0 failed)
+[2025-09-04T08:12:12.411Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:12:18.412Z] 📄 Processing 20/20: MAR_wartime_letters_441103 part 1
+[2025-09-04T08:12:40.004Z] ✅ Success: 858 characters transcribed
+[2025-09-04T08:12:40.004Z] 📊 Session progress: 60 total (60 success, 0 failed)
+[2025-09-04T08:12:40.005Z] 🎯 Batch complete: 20 successful, 0 failed
+[2025-09-04T08:12:40.005Z] ✅ Batch #3 completed
+[2025-09-04T08:12:40.006Z] 📈 Current statistics: 515 completed, 190 pending, 16 failed
+[2025-09-04T08:12:40.006Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T08:13:10.007Z] 
+🚀 Starting batch #4
+[2025-09-04T08:13:10.008Z] 🔍 Looking for 20 pending files...
+[2025-09-04T08:13:10.009Z] 📋 Found 20 pending files to process
+[2025-09-04T08:13:10.010Z] 📄 Processing 1/20: MAR_wartime_letters_441103 part 2
+[2025-09-04T08:13:28.589Z] ✅ Success: 366 characters transcribed
+[2025-09-04T08:13:28.589Z] 📊 Session progress: 61 total (61 success, 0 failed)
+[2025-09-04T08:13:28.589Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:13:34.590Z] 📄 Processing 2/20: MAR_wartime_letters_441105 part 1
+[2025-09-04T08:13:53.854Z] ✅ Success: 865 characters transcribed
+[2025-09-04T08:13:53.854Z] 📊 Session progress: 62 total (62 success, 0 failed)
+[2025-09-04T08:13:53.854Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:13:59.854Z] 📄 Processing 3/20: MAR_wartime_letters_441105 part 2
+[2025-09-04T08:14:46.354Z] ✅ Success: 855 characters transcribed
+[2025-09-04T08:14:46.354Z] 📊 Session progress: 63 total (63 success, 0 failed)
+[2025-09-04T08:14:46.354Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:14:52.355Z] 📄 Processing 4/20: MAR_wartime_letters_441108 part 1
+[2025-09-04T08:15:13.442Z] ✅ Success: 725 characters transcribed
+[2025-09-04T08:15:13.442Z] 📊 Session progress: 64 total (64 success, 0 failed)
+[2025-09-04T08:15:13.443Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:15:19.443Z] 📄 Processing 5/20: MAR_wartime_letters_441108 part 2
+[2025-09-04T08:15:52.970Z] ✅ Success: 728 characters transcribed
+[2025-09-04T08:15:52.970Z] 📊 Session progress: 65 total (65 success, 0 failed)
+[2025-09-04T08:15:52.970Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:15:58.971Z] 📄 Processing 6/20: MAR_wartime_letters_441110 part 1
+[2025-09-04T08:16:39.654Z] ✅ Success: 969 characters transcribed
+[2025-09-04T08:16:39.654Z] 📊 Session progress: 66 total (66 success, 0 failed)
+[2025-09-04T08:16:39.654Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:16:45.655Z] 📄 Processing 7/20: MAR_wartime_letters_441110 part 2
+[2025-09-04T08:17:13.874Z] ✅ Success: 677 characters transcribed
+[2025-09-04T08:17:13.874Z] 📊 Session progress: 67 total (67 success, 0 failed)
+[2025-09-04T08:17:13.874Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:17:19.874Z] 📄 Processing 8/20: MAR_wartime_letters_441112 part 1
+[2025-09-04T08:17:37.007Z] ✅ Success: 585 characters transcribed
+[2025-09-04T08:17:37.007Z] 📊 Session progress: 68 total (68 success, 0 failed)
+[2025-09-04T08:17:37.007Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:17:43.006Z] 📄 Processing 9/20: MAR_wartime_letters_441112 part 2
+[2025-09-04T08:18:09.372Z] ✅ Success: 635 characters transcribed
+[2025-09-04T08:18:09.372Z] 📊 Session progress: 69 total (69 success, 0 failed)
+[2025-09-04T08:18:09.373Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:18:15.373Z] 📄 Processing 10/20: MAR_wartime_letters_441112 part 3
+[2025-09-04T08:18:32.118Z] ✅ Success: 552 characters transcribed
+[2025-09-04T08:18:32.118Z] 📊 Session progress: 70 total (70 success, 0 failed)
+[2025-09-04T08:18:32.118Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:18:38.119Z] 📄 Processing 11/20: MAR_wartime_letters_441112 part 4
+[2025-09-04T08:19:02.555Z] ✅ Success: 578 characters transcribed
+[2025-09-04T08:19:02.555Z] 📊 Session progress: 71 total (71 success, 0 failed)
+[2025-09-04T08:19:02.555Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:19:08.556Z] 📄 Processing 12/20: MAR_wartime_letters_441112 part 5
+[2025-09-04T08:19:28.090Z] ✅ Success: 638 characters transcribed
+[2025-09-04T08:19:28.090Z] 📊 Session progress: 72 total (72 success, 0 failed)
+[2025-09-04T08:19:28.090Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:19:34.091Z] 📄 Processing 13/20: MAR_wartime_letters_441112 part 6
+[2025-09-04T08:19:50.070Z] ✅ Success: 89 characters transcribed
+[2025-09-04T08:19:50.070Z] 📊 Session progress: 73 total (73 success, 0 failed)
+[2025-09-04T08:19:50.070Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:19:56.072Z] 📄 Processing 14/20: MAR_wartime_letters_441113 part 1
+[2025-09-04T08:20:15.530Z] ✅ Success: 493 characters transcribed
+[2025-09-04T08:20:15.530Z] 📊 Session progress: 74 total (74 success, 0 failed)
+[2025-09-04T08:20:15.530Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:20:21.530Z] 📄 Processing 15/20: MAR_wartime_letters_441113 part 2
+[2025-09-04T08:20:36.418Z] ✅ Success: 481 characters transcribed
+[2025-09-04T08:20:36.418Z] 📊 Session progress: 75 total (75 success, 0 failed)
+[2025-09-04T08:20:36.418Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:20:42.418Z] 📄 Processing 16/20: MAR_wartime_letters_441113 part 3
+[2025-09-04T08:21:06.092Z] ✅ Success: 484 characters transcribed
+[2025-09-04T08:21:06.092Z] 📊 Session progress: 76 total (76 success, 0 failed)
+[2025-09-04T08:21:06.092Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:21:12.093Z] 📄 Processing 17/20: MAR_wartime_letters_441114 part 1
+[2025-09-04T08:21:35.975Z] ✅ Success: 854 characters transcribed
+[2025-09-04T08:21:35.975Z] 📊 Session progress: 77 total (77 success, 0 failed)
+[2025-09-04T08:21:35.975Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:21:41.976Z] 📄 Processing 18/20: MAR_wartime_letters_441121 part 1
+[2025-09-04T08:22:20.844Z] ✅ Success: 904 characters transcribed
+[2025-09-04T08:22:20.844Z] 📊 Session progress: 78 total (78 success, 0 failed)
+[2025-09-04T08:22:20.845Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:22:26.844Z] 📄 Processing 19/20: MAR_wartime_letters_441121 part 2
+[2025-09-04T08:23:05.297Z] ✅ Success: 942 characters transcribed
+[2025-09-04T08:23:05.297Z] 📊 Session progress: 79 total (79 success, 0 failed)
+[2025-09-04T08:23:05.297Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:23:11.298Z] 📄 Processing 20/20: MAR_wartime_letters_441209 part 1
+[2025-09-04T08:23:27.735Z] ✅ Success: 824 characters transcribed
+[2025-09-04T08:23:27.735Z] 📊 Session progress: 80 total (80 success, 0 failed)
+[2025-09-04T08:23:27.735Z] 🎯 Batch complete: 20 successful, 0 failed
+[2025-09-04T08:23:27.735Z] ✅ Batch #4 completed
+[2025-09-04T08:23:27.737Z] 📈 Current statistics: 535 completed, 170 pending, 16 failed
+[2025-09-04T08:23:27.737Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T08:23:57.738Z] 
+🚀 Starting batch #5
+[2025-09-04T08:23:57.738Z] 🔍 Looking for 20 pending files...
+[2025-09-04T08:23:57.740Z] 📋 Found 20 pending files to process
+[2025-09-04T08:23:57.740Z] 📄 Processing 1/20: MAR_wartime_letters_441209 part 2
+[2025-09-04T08:24:16.906Z] ✅ Success: 436 characters transcribed
+[2025-09-04T08:24:16.906Z] 📊 Session progress: 81 total (81 success, 0 failed)
+[2025-09-04T08:24:16.906Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:24:22.907Z] 📄 Processing 2/20: MAR_wartime_letters_441211 part 1
+[2025-09-04T08:24:42.160Z] ✅ Success: 983 characters transcribed
+[2025-09-04T08:24:42.160Z] 📊 Session progress: 82 total (82 success, 0 failed)
+[2025-09-04T08:24:42.160Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:24:48.160Z] 📄 Processing 3/20: MAR_wartime_letters_441211 part 2
+[2025-09-04T08:25:16.542Z] ✅ Success: 441 characters transcribed
+[2025-09-04T08:25:16.542Z] 📊 Session progress: 83 total (83 success, 0 failed)
+[2025-09-04T08:25:16.542Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:25:22.543Z] 📄 Processing 4/20: MAR_wartime_letters_441215 part 1
+[2025-09-04T08:26:13.289Z] ✅ Success: 2188 characters transcribed
+[2025-09-04T08:26:13.289Z] 📊 Session progress: 84 total (84 success, 0 failed)
+[2025-09-04T08:26:13.290Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:26:19.290Z] 📄 Processing 5/20: MAR_wartime_letters_441215 part 2
+[2025-09-04T08:26:47.890Z] ✅ Success: 931 characters transcribed
+[2025-09-04T08:26:47.890Z] 📊 Session progress: 85 total (85 success, 0 failed)
+[2025-09-04T08:26:47.890Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:26:53.890Z] 📄 Processing 6/20: MAR_wartime_letters_450115 part 1
+[2025-09-04T08:27:17.388Z] ✅ Success: 892 characters transcribed
+[2025-09-04T08:27:17.388Z] 📊 Session progress: 86 total (86 success, 0 failed)
+[2025-09-04T08:27:17.388Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:27:23.389Z] 📄 Processing 7/20: MAR_wartime_letters_450115 part 2
+[2025-09-04T08:27:58.409Z] ✅ Success: 874 characters transcribed
+[2025-09-04T08:27:58.410Z] 📊 Session progress: 87 total (87 success, 0 failed)
+[2025-09-04T08:27:58.410Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:28:04.410Z] 📄 Processing 8/20: MAR_wartime_letters_450115 part 3
+[2025-09-04T08:28:17.190Z] ✅ Success: 637 characters transcribed
+[2025-09-04T08:28:17.190Z] 📊 Session progress: 88 total (88 success, 0 failed)
+[2025-09-04T08:28:17.190Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:28:23.191Z] 📄 Processing 9/20: MAR_wartime_letters_450118 part 1
+[2025-09-04T08:28:53.226Z] ✅ Success: 2430 characters transcribed
+[2025-09-04T08:28:53.226Z] 📊 Session progress: 89 total (89 success, 0 failed)
+[2025-09-04T08:28:53.226Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:28:59.227Z] 📄 Processing 10/20: MAR_wartime_letters_450118 part 2
+[2025-09-04T08:29:30.002Z] ✅ Success: 1814 characters transcribed
+[2025-09-04T08:29:30.002Z] 📊 Session progress: 90 total (90 success, 0 failed)
+[2025-09-04T08:29:30.002Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:29:36.003Z] 📄 Processing 11/20: MAR_wartime_letters_450131 part 1
+[2025-09-04T08:30:09.883Z] ✅ Success: 2464 characters transcribed
+[2025-09-04T08:30:09.883Z] 📊 Session progress: 91 total (91 success, 0 failed)
+[2025-09-04T08:30:09.883Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:30:15.883Z] 📄 Processing 12/20: MAR_wartime_letters_450131 part 2
+[2025-09-04T08:30:36.240Z] ✅ Success: 1368 characters transcribed
+[2025-09-04T08:30:36.240Z] 📊 Session progress: 92 total (92 success, 0 failed)
+[2025-09-04T08:30:36.240Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:30:42.241Z] 📄 Processing 13/20: MAR_wartime_letters_450206 part 1
+[2025-09-04T08:31:10.652Z] ✅ Success: 923 characters transcribed
+[2025-09-04T08:31:10.652Z] 📊 Session progress: 93 total (93 success, 0 failed)
+[2025-09-04T08:31:10.652Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:31:16.653Z] 📄 Processing 14/20: MAR_wartime_letters_450206 part 2
+[2025-09-04T08:31:57.337Z] ✅ Success: 1046 characters transcribed
+[2025-09-04T08:31:57.337Z] 📊 Session progress: 94 total (94 success, 0 failed)
+[2025-09-04T08:31:57.337Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:32:03.338Z] 📄 Processing 15/20: MAR_wartime_letters_450206 part 3
+[2025-09-04T08:32:27.505Z] ✅ Success: 333 characters transcribed
+[2025-09-04T08:32:27.505Z] 📊 Session progress: 95 total (95 success, 0 failed)
+[2025-09-04T08:32:27.506Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:32:33.506Z] 📄 Processing 16/20: MAR_wartime_letters_450207 part 1
+[2025-09-04T08:33:00.820Z] ✅ Success: 856 characters transcribed
+[2025-09-04T08:33:00.820Z] 📊 Session progress: 96 total (96 success, 0 failed)
+[2025-09-04T08:33:00.820Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:33:06.820Z] 📄 Processing 17/20: MAR_wartime_letters_450207 part 2
+[2025-09-04T08:33:35.964Z] ✅ Success: 1077 characters transcribed
+[2025-09-04T08:33:35.964Z] 📊 Session progress: 97 total (97 success, 0 failed)
+[2025-09-04T08:33:35.964Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:33:41.965Z] 📄 Processing 18/20: MAR_wartime_letters_450207 part 3
+[2025-09-04T08:34:09.842Z] ✅ Success: 881 characters transcribed
+[2025-09-04T08:34:09.842Z] 📊 Session progress: 98 total (98 success, 0 failed)
+[2025-09-04T08:34:09.842Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:34:15.843Z] 📄 Processing 19/20: MAR_wartime_letters_450217 part 1
+[2025-09-04T08:34:51.200Z] ✅ Success: 2218 characters transcribed
+[2025-09-04T08:34:51.200Z] 📊 Session progress: 99 total (99 success, 0 failed)
+[2025-09-04T08:34:51.200Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:34:57.200Z] 📄 Processing 20/20: MAR_wartime_letters_450218 part 1
+[2025-09-04T08:35:58.192Z] ✅ Success: 2344 characters transcribed
+[2025-09-04T08:35:58.192Z] 📊 Session progress: 100 total (100 success, 0 failed)
+[2025-09-04T08:35:58.192Z] 🎯 Batch complete: 20 successful, 0 failed
+[2025-09-04T08:35:58.192Z] ✅ Batch #5 completed
+[2025-09-04T08:35:58.193Z] 📈 Current statistics: 555 completed, 150 pending, 16 failed
+[2025-09-04T08:35:58.194Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T08:36:28.193Z] 
+🚀 Starting batch #6
+[2025-09-04T08:36:28.194Z] 🔍 Looking for 20 pending files...
+[2025-09-04T08:36:28.195Z] 📋 Found 20 pending files to process
+[2025-09-04T08:36:28.195Z] 📄 Processing 1/20: MAR_wartime_letters_450223 part 0
+[2025-09-04T08:36:49.782Z] ✅ Success: 201 characters transcribed
+[2025-09-04T08:36:49.782Z] 📊 Session progress: 101 total (101 success, 0 failed)
+[2025-09-04T08:36:49.782Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:36:55.782Z] 📄 Processing 2/20: MAR_wartime_letters_450223 part 1
+[2025-09-04T08:37:15.842Z] ✅ Success: 740 characters transcribed
+[2025-09-04T08:37:15.842Z] 📊 Session progress: 102 total (102 success, 0 failed)
+[2025-09-04T08:37:15.843Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:37:21.842Z] 📄 Processing 3/20: MAR_wartime_letters_450223 part 2
+[2025-09-04T08:37:39.974Z] ✅ Success: 777 characters transcribed
+[2025-09-04T08:37:39.974Z] 📊 Session progress: 103 total (103 success, 0 failed)
+[2025-09-04T08:37:39.975Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:37:45.974Z] 📄 Processing 4/20: MAR_wartime_letters_450223 part 3
+[2025-09-04T08:38:11.085Z] ✅ Success: 788 characters transcribed
+[2025-09-04T08:38:11.086Z] 📊 Session progress: 104 total (104 success, 0 failed)
+[2025-09-04T08:38:11.086Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:38:17.086Z] 📄 Processing 5/20: MAR_wartime_letters_450223 part 4
+[2025-09-04T08:38:33.858Z] ✅ Success: 644 characters transcribed
+[2025-09-04T08:38:33.858Z] 📊 Session progress: 105 total (105 success, 0 failed)
+[2025-09-04T08:38:33.858Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:38:39.859Z] 📄 Processing 6/20: MAR_wartime_letters_450302 part 1
+[2025-09-04T08:39:06.703Z] ✅ Success: 211 characters transcribed
+[2025-09-04T08:39:06.703Z] 📊 Session progress: 106 total (106 success, 0 failed)
+[2025-09-04T08:39:06.704Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:39:12.704Z] 📄 Processing 7/20: MAR_wartime_letters_450302 part 2
+[2025-09-04T08:39:44.014Z] ✅ Success: 2350 characters transcribed
+[2025-09-04T08:39:44.014Z] 📊 Session progress: 107 total (107 success, 0 failed)
+[2025-09-04T08:39:44.014Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:39:50.015Z] 📄 Processing 8/20: MAR_wartime_letters_450302 part 3
+[2025-09-04T08:40:35.173Z] ✅ Success: 2488 characters transcribed
+[2025-09-04T08:40:35.173Z] 📊 Session progress: 108 total (108 success, 0 failed)
+[2025-09-04T08:40:35.174Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:40:41.174Z] 📄 Processing 9/20: MAR_wartime_letters_450305 part 1
+[2025-09-04T08:41:13.148Z] ✅ Success: 2832 characters transcribed
+[2025-09-04T08:41:13.148Z] 📊 Session progress: 109 total (109 success, 0 failed)
+[2025-09-04T08:41:13.149Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:41:19.149Z] 📄 Processing 10/20: MAR_wartime_letters_450305 part 2
+[2025-09-04T08:41:48.765Z] ✅ Success: 774 characters transcribed
+[2025-09-04T08:41:48.765Z] 📊 Session progress: 110 total (110 success, 0 failed)
+[2025-09-04T08:41:48.765Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:41:54.764Z] 📄 Processing 11/20: MAR_wartime_letters_450308 part 1
+[2025-09-04T08:42:19.393Z] ✅ Success: 1713 characters transcribed
+[2025-09-04T08:42:19.393Z] 📊 Session progress: 111 total (111 success, 0 failed)
+[2025-09-04T08:42:19.393Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:42:25.393Z] 📄 Processing 12/20: MAR_wartime_letters_450308 part 2
+[2025-09-04T08:42:45.614Z] ✅ Success: 1010 characters transcribed
+[2025-09-04T08:42:45.615Z] 📊 Session progress: 112 total (112 success, 0 failed)
+[2025-09-04T08:42:45.615Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:42:51.614Z] 📄 Processing 13/20: MAR_wartime_letters_450309 part 1
+[2025-09-04T08:43:34.603Z] ✅ Success: 1362 characters transcribed
+[2025-09-04T08:43:34.603Z] 📊 Session progress: 113 total (113 success, 0 failed)
+[2025-09-04T08:43:34.603Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:43:40.603Z] 📄 Processing 14/20: MAR_wartime_letters_450309 part 2
+[2025-09-04T08:44:01.513Z] ✅ Success: 592 characters transcribed
+[2025-09-04T08:44:01.513Z] 📊 Session progress: 114 total (114 success, 0 failed)
+[2025-09-04T08:44:01.513Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:44:07.513Z] 📄 Processing 15/20: MAR_wartime_letters_450317 part 1
+[2025-09-04T08:44:33.131Z] ✅ Success: 2087 characters transcribed
+[2025-09-04T08:44:33.131Z] 📊 Session progress: 115 total (115 success, 0 failed)
+[2025-09-04T08:44:33.131Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:44:39.132Z] 📄 Processing 16/20: MAR_wartime_letters_450317 part 2
+[2025-09-04T08:45:11.126Z] ✅ Success: 1230 characters transcribed
+[2025-09-04T08:45:11.126Z] 📊 Session progress: 116 total (116 success, 0 failed)
+[2025-09-04T08:45:11.126Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:45:17.127Z] 📄 Processing 17/20: MAR_wartime_letters_450317 part 3
+[2025-09-04T08:45:51.000Z] ✅ Success: 1764 characters transcribed
+[2025-09-04T08:45:51.000Z] 📊 Session progress: 117 total (117 success, 0 failed)
+[2025-09-04T08:45:51.000Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:45:57.001Z] 📄 Processing 18/20: MAR_wartime_letters_450317 part 4
+[2025-09-04T08:46:32.518Z] ✅ Success: 1142 characters transcribed
+[2025-09-04T08:46:32.518Z] 📊 Session progress: 118 total (118 success, 0 failed)
+[2025-09-04T08:46:32.518Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:46:38.519Z] 📄 Processing 19/20: MAR_wartime_letters_450329 part 1
+[2025-09-04T08:47:08.156Z] ✅ Success: 2518 characters transcribed
+[2025-09-04T08:47:08.157Z] 📊 Session progress: 119 total (119 success, 0 failed)
+[2025-09-04T08:47:08.157Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:47:14.157Z] 📄 Processing 20/20: MAR_wartime_letters_450329 part 2
+[2025-09-04T08:47:42.359Z] ✅ Success: 1377 characters transcribed
+[2025-09-04T08:47:42.359Z] 📊 Session progress: 120 total (120 success, 0 failed)
+[2025-09-04T08:47:42.360Z] 🎯 Batch complete: 20 successful, 0 failed
+[2025-09-04T08:47:42.360Z] ✅ Batch #6 completed
+[2025-09-04T08:47:42.362Z] 📈 Current statistics: 575 completed, 130 pending, 16 failed
+[2025-09-04T08:47:42.362Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T08:48:12.363Z] 
+🚀 Starting batch #7
+[2025-09-04T08:48:12.363Z] 🔍 Looking for 20 pending files...
+[2025-09-04T08:48:12.365Z] 📋 Found 20 pending files to process
+[2025-09-04T08:48:12.365Z] 📄 Processing 1/20: MAR_wartime_letters_450330 part 1
+[2025-09-04T08:49:13.286Z] ✅ Success: 2123 characters transcribed
+[2025-09-04T08:49:13.286Z] 📊 Session progress: 121 total (121 success, 0 failed)
+[2025-09-04T08:49:13.286Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:49:19.287Z] 📄 Processing 2/20: MAR_wartime_letters_450330 part 2
+[2025-09-04T08:49:43.802Z] ✅ Success: 745 characters transcribed
+[2025-09-04T08:49:43.802Z] 📊 Session progress: 122 total (122 success, 0 failed)
+[2025-09-04T08:49:43.802Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:49:49.803Z] 📄 Processing 3/20: MAR_wartime_letters_450331 part 1
+[2025-09-04T08:50:20.256Z] ✅ Success: 1088 characters transcribed
+[2025-09-04T08:50:20.257Z] 📊 Session progress: 123 total (123 success, 0 failed)
+[2025-09-04T08:50:20.257Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:50:26.257Z] 📄 Processing 4/20: MAR_wartime_letters_450331 part 2
+[2025-09-04T08:51:02.659Z] ✅ Success: 1097 characters transcribed
+[2025-09-04T08:51:02.659Z] 📊 Session progress: 124 total (124 success, 0 failed)
+[2025-09-04T08:51:02.659Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:51:08.660Z] 📄 Processing 5/20: MAR_wartime_letters_450331 part 3
+[2025-09-04T08:51:33.830Z] ✅ Success: 722 characters transcribed
+[2025-09-04T08:51:33.831Z] 📊 Session progress: 125 total (125 success, 0 failed)
+[2025-09-04T08:51:33.831Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:51:39.832Z] 📄 Processing 6/20: MAR_wartime_letters_450404 part 1
+[2025-09-04T08:52:16.143Z] ✅ Success: 1904 characters transcribed
+[2025-09-04T08:52:16.143Z] 📊 Session progress: 126 total (126 success, 0 failed)
+[2025-09-04T08:52:16.143Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:52:22.144Z] 📄 Processing 7/20: MAR_wartime_letters_450410 part 1
+[2025-09-04T08:52:51.193Z] ✅ Success: 2315 characters transcribed
+[2025-09-04T08:52:51.193Z] 📊 Session progress: 127 total (127 success, 0 failed)
+[2025-09-04T08:52:51.193Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:52:57.194Z] 📄 Processing 8/20: MAR_wartime_letters_450410 part 2
+[2025-09-04T08:53:15.564Z] ✅ Success: 1051 characters transcribed
+[2025-09-04T08:53:15.565Z] 📊 Session progress: 128 total (128 success, 0 failed)
+[2025-09-04T08:53:15.565Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:53:21.565Z] 📄 Processing 9/20: MAR_wartime_letters_450411 part 1
+[2025-09-04T08:53:50.584Z] ✅ Success: 2667 characters transcribed
+[2025-09-04T08:53:50.584Z] 📊 Session progress: 129 total (129 success, 0 failed)
+[2025-09-04T08:53:50.584Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:53:56.584Z] 📄 Processing 10/20: MAR_wartime_letters_450411 part 2
+[2025-09-04T08:54:14.751Z] ✅ Success: 593 characters transcribed
+[2025-09-04T08:54:14.751Z] 📊 Session progress: 130 total (130 success, 0 failed)
+[2025-09-04T08:54:14.752Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:54:20.751Z] 📄 Processing 11/20: MAR_wartime_letters_450411 part 3
+[2025-09-04T08:54:58.834Z] ✅ Success: 614 characters transcribed
+[2025-09-04T08:54:58.834Z] 📊 Session progress: 131 total (131 success, 0 failed)
+[2025-09-04T08:54:58.834Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:55:04.834Z] 📄 Processing 12/20: MAR_wartime_letters_450411 part 4
+[2025-09-04T08:55:31.673Z] ✅ Success: 649 characters transcribed
+[2025-09-04T08:55:31.673Z] 📊 Session progress: 132 total (132 success, 0 failed)
+[2025-09-04T08:55:31.673Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:55:37.674Z] 📄 Processing 13/20: MAR_wartime_letters_450411 part 5
+[2025-09-04T08:56:00.417Z] ✅ Success: 354 characters transcribed
+[2025-09-04T08:56:00.417Z] 📊 Session progress: 133 total (133 success, 0 failed)
+[2025-09-04T08:56:00.417Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:56:06.417Z] 📄 Processing 14/20: MAR_wartime_letters_450417 part 1
+[2025-09-04T08:56:39.622Z] ✅ Success: 873 characters transcribed
+[2025-09-04T08:56:39.622Z] 📊 Session progress: 134 total (134 success, 0 failed)
+[2025-09-04T08:56:39.622Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:56:45.623Z] 📄 Processing 15/20: MAR_wartime_letters_450417 part 2
+[2025-09-04T08:57:08.929Z] ✅ Success: 880 characters transcribed
+[2025-09-04T08:57:08.929Z] 📊 Session progress: 135 total (135 success, 0 failed)
+[2025-09-04T08:57:08.929Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:57:14.930Z] 📄 Processing 16/20: MAR_wartime_letters_450419 part 1
+[2025-09-04T08:57:50.945Z] ✅ Success: 2652 characters transcribed
+[2025-09-04T08:57:50.945Z] 📊 Session progress: 136 total (136 success, 0 failed)
+[2025-09-04T08:57:50.945Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:57:56.945Z] 📄 Processing 17/20: MAR_wartime_letters_450419 part 2
+[2025-09-04T08:58:22.253Z] ✅ Success: 1007 characters transcribed
+[2025-09-04T08:58:22.253Z] 📊 Session progress: 137 total (137 success, 0 failed)
+[2025-09-04T08:58:22.253Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:58:28.254Z] 📄 Processing 18/20: MAR_wartime_letters_450423 part 1
+[2025-09-04T08:58:49.225Z] ✅ Success: 606 characters transcribed
+[2025-09-04T08:58:49.225Z] 📊 Session progress: 138 total (138 success, 0 failed)
+[2025-09-04T08:58:49.225Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:58:55.225Z] 📄 Processing 19/20: MAR_wartime_letters_450423 part 2
+[2025-09-04T08:59:18.801Z] ✅ Success: 597 characters transcribed
+[2025-09-04T08:59:18.801Z] 📊 Session progress: 139 total (139 success, 0 failed)
+[2025-09-04T08:59:18.802Z] ⏳ Waiting 6s before next file...
+[2025-09-04T08:59:24.802Z] 📄 Processing 20/20: MAR_wartime_letters_450423 part 3
+[2025-09-04T08:59:47.761Z] ✅ Success: 712 characters transcribed
+[2025-09-04T08:59:47.761Z] 📊 Session progress: 140 total (140 success, 0 failed)
+[2025-09-04T08:59:47.761Z] 🎯 Batch complete: 20 successful, 0 failed
+[2025-09-04T08:59:47.761Z] ✅ Batch #7 completed
+[2025-09-04T08:59:47.763Z] 📈 Current statistics: 595 completed, 110 pending, 16 failed
+[2025-09-04T08:59:47.763Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T09:00:17.762Z] 
+🚀 Starting batch #8
+[2025-09-04T09:00:17.763Z] 🔍 Looking for 20 pending files...
+[2025-09-04T09:00:17.765Z] 📋 Found 19 pending files to process
+[2025-09-04T09:00:17.765Z] 📄 Processing 1/19: MAR_wartime_letters_450423 part 4
+[2025-09-04T09:00:19.296Z] ❌ Failed: 400 <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+[2025-09-04T09:00:19.297Z] 📊 Session progress: 141 total (140 success, 1 failed)
+[2025-09-04T09:00:19.297Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:00:25.298Z] 📄 Processing 2/19: MAR_wartime_letters_450423 part 5
+[2025-09-04T09:00:45.721Z] ✅ Success: 702 characters transcribed
+[2025-09-04T09:00:45.722Z] 📊 Session progress: 142 total (141 success, 1 failed)
+[2025-09-04T09:00:45.722Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:00:51.722Z] 📄 Processing 3/19: MAR_wartime_letters_450423 part 6
+[2025-09-04T09:01:16.445Z] ✅ Success: 658 characters transcribed
+[2025-09-04T09:01:16.445Z] 📊 Session progress: 143 total (142 success, 1 failed)
+[2025-09-04T09:01:16.445Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:01:22.446Z] 📄 Processing 4/19: MAR_wartime_letters_450423 part 7
+[2025-09-04T09:02:04.034Z] ✅ Success: 681 characters transcribed
+[2025-09-04T09:02:04.034Z] 📊 Session progress: 144 total (143 success, 1 failed)
+[2025-09-04T09:02:04.034Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:02:10.035Z] 📄 Processing 5/19: MAR_wartime_letters_450423 part 8
+[2025-09-04T09:02:26.227Z] ✅ Success: 348 characters transcribed
+[2025-09-04T09:02:26.227Z] 📊 Session progress: 145 total (144 success, 1 failed)
+[2025-09-04T09:02:26.227Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:02:32.228Z] 📄 Processing 6/19: MAR_wartime_letters_450508 part 1
+[2025-09-04T09:03:05.658Z] ✅ Success: 2155 characters transcribed
+[2025-09-04T09:03:05.658Z] 📊 Session progress: 146 total (145 success, 1 failed)
+[2025-09-04T09:03:05.658Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:03:11.659Z] 📄 Processing 7/19: MAR_wartime_letters_450508 part 2
+[2025-09-04T09:03:31.004Z] ✅ Success: 842 characters transcribed
+[2025-09-04T09:03:31.004Z] 📊 Session progress: 147 total (146 success, 1 failed)
+[2025-09-04T09:03:31.004Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:03:37.004Z] 📄 Processing 8/19: MAR_wartime_letters_450510 part 1
+[2025-09-04T09:04:05.612Z] ✅ Success: 2063 characters transcribed
+[2025-09-04T09:04:05.612Z] 📊 Session progress: 148 total (147 success, 1 failed)
+[2025-09-04T09:04:05.612Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:04:11.613Z] 📄 Processing 9/19: MAR_wartime_letters_450510 part 2
+[2025-09-04T09:04:41.188Z] ✅ Success: 1818 characters transcribed
+[2025-09-04T09:04:41.188Z] 📊 Session progress: 149 total (148 success, 1 failed)
+[2025-09-04T09:04:41.188Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:04:47.189Z] 📄 Processing 10/19: MAR_wartime_letters_450511 part 1
+[2025-09-04T09:05:11.897Z] ✅ Success: 1989 characters transcribed
+[2025-09-04T09:05:11.898Z] 📊 Session progress: 150 total (149 success, 1 failed)
+[2025-09-04T09:05:11.898Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:05:17.898Z] 📄 Processing 11/19: MAR_wartime_letters_450511 part 2
+[2025-09-04T09:05:41.882Z] ✅ Success: 933 characters transcribed
+[2025-09-04T09:05:41.882Z] 📊 Session progress: 151 total (150 success, 1 failed)
+[2025-09-04T09:05:41.882Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:05:47.882Z] 📄 Processing 12/19: MAR_wartime_letters_450512 part 1
+[2025-09-04T09:06:20.842Z] ✅ Success: 1932 characters transcribed
+[2025-09-04T09:06:20.842Z] 📊 Session progress: 152 total (151 success, 1 failed)
+[2025-09-04T09:06:20.842Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:06:26.843Z] 📄 Processing 13/19: MAR_wartime_letters_450512 part 2
+[2025-09-04T09:06:54.074Z] ✅ Success: 1102 characters transcribed
+[2025-09-04T09:06:54.074Z] 📊 Session progress: 153 total (152 success, 1 failed)
+[2025-09-04T09:06:54.074Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:07:00.075Z] 📄 Processing 14/19: RAB_wartime_letters_450522 part 1
+[2025-09-04T09:07:29.637Z] ✅ Success: 675 characters transcribed
+[2025-09-04T09:07:29.637Z] 📊 Session progress: 154 total (153 success, 1 failed)
+[2025-09-04T09:07:29.637Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:07:35.638Z] 📄 Processing 15/19: RAB_wartime_letters_450522 part 2
+[2025-09-04T09:07:58.584Z] ✅ Success: 737 characters transcribed
+[2025-09-04T09:07:58.584Z] 📊 Session progress: 155 total (154 success, 1 failed)
+[2025-09-04T09:07:58.584Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:08:04.585Z] 📄 Processing 16/19: RAB_wartime_letters_450522 part 3
+[2025-09-04T09:08:30.524Z] ✅ Success: 665 characters transcribed
+[2025-09-04T09:08:30.524Z] 📊 Session progress: 156 total (155 success, 1 failed)
+[2025-09-04T09:08:30.524Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:08:36.525Z] 📄 Processing 17/19: RAB_wartime_letters_450522 part 4
+[2025-09-04T09:08:57.361Z] ✅ Success: 157 characters transcribed
+[2025-09-04T09:08:57.361Z] 📊 Session progress: 157 total (156 success, 1 failed)
+[2025-09-04T09:08:57.362Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:09:03.363Z] 📄 Processing 18/19: MAR_wartime_letters_460124 part 1
+[2025-09-04T09:09:26.509Z] ✅ Success: 739 characters transcribed
+[2025-09-04T09:09:26.509Z] 📊 Session progress: 158 total (157 success, 1 failed)
+[2025-09-04T09:09:26.509Z] ⏳ Waiting 6s before next file...
+[2025-09-04T09:09:32.510Z] 📄 Processing 19/19: MAR_wartime_letters_460124 part 2
+[2025-09-04T09:10:05.780Z] ✅ Success: 798 characters transcribed
+[2025-09-04T09:10:05.780Z] 📊 Session progress: 159 total (158 success, 1 failed)
+[2025-09-04T09:10:05.780Z] 🎯 Batch complete: 18 successful, 1 failed
+[2025-09-04T09:10:05.780Z] ✅ Batch #8 completed
+[2025-09-04T09:10:05.782Z] 📈 Current statistics: 613 completed, 91 pending, 17 failed
+[2025-09-04T09:10:05.782Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T09:10:35.783Z] 
+🚀 Starting batch #9
+[2025-09-04T09:10:35.783Z] 🔍 Looking for 20 pending files...
+[2025-09-04T09:10:35.792Z] ✅ No more pending files found. All transcriptions complete!
+[2025-09-04T09:10:35.792Z] 🎉 All transcriptions completed! Session finished.
+[2025-09-04T09:10:35.792Z] 🧹 Cleaning up background transcriber...
+[2025-09-04T09:10:35.792Z] 📊 Session summary:
+[2025-09-04T09:10:35.792Z]    Duration: 5453s
+[2025-09-04T09:10:35.793Z]    Total processed: 159
+[2025-09-04T09:10:35.793Z]    Total successful: 158
+[2025-09-04T09:10:35.793Z]    Total failed: 1
+[2025-09-04T09:10:35.793Z]    Success rate: 99%
+[2025-09-04T09:10:35.794Z] ✅ Background transcriber stopped cleanly
+[2025-09-04T10:10:14.863Z] 📨 Received SIGINT, gracefully shutting down...
+[2025-09-04T10:10:14.863Z] 🛑 Stopping background transcriber...
+[2025-09-04T10:10:32.701Z] 🚀 Background transcriber initialized successfully
+[2025-09-04T10:10:32.702Z] 📊 Using service: openai
+[2025-09-04T10:10:32.702Z] 📦 Batch size: 20
+[2025-09-04T10:10:32.702Z] ⏱️  Delay between batches: 30s
+[2025-09-04T10:10:32.702Z] ⏱️  Delay between files: 6s
+[2025-09-04T10:10:32.702Z] 🎬 Starting background transcription service
+[2025-09-04T10:10:32.705Z] 📈 Initial statistics:
+[2025-09-04T10:10:32.706Z]    Total files: 730
+[2025-09-04T10:10:32.706Z]    Pending: 116
+[2025-09-04T10:10:32.706Z]    Completed: 614
+[2025-09-04T10:10:32.706Z]    Failed: 0
+[2025-09-04T10:10:32.706Z] 
+🚀 Starting batch #1
+[2025-09-04T10:10:32.706Z] 🔍 Looking for 20 pending files...
+[2025-09-04T10:10:32.708Z] 📋 Found 20 pending files to process
+[2025-09-04T10:10:32.708Z] 📄 Processing 1/20: MAR_wartime_letters_430001 part 1
+[2025-09-04T10:10:40.349Z] ✅ Success: 44 characters transcribed
+[2025-09-04T10:10:40.349Z] 📊 Session progress: 1 total (1 success, 0 failed)
+[2025-09-04T10:10:40.349Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:10:46.350Z] 📄 Processing 2/20: MAR_wartime_letters_430001 part 2
+[2025-09-04T10:10:59.198Z] ✅ Success: 258 characters transcribed
+[2025-09-04T10:10:59.198Z] 📊 Session progress: 2 total (2 success, 0 failed)
+[2025-09-04T10:10:59.198Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:11:05.198Z] 📄 Processing 3/20: MAR_wartime_letters_430216 part 1
+[2025-09-04T10:11:22.318Z] ✅ Success: 970 characters transcribed
+[2025-09-04T10:11:22.318Z] 📊 Session progress: 3 total (3 success, 0 failed)
+[2025-09-04T10:11:22.318Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:11:28.319Z] 📄 Processing 4/20: MAR_wartime_letters_430216 part 2
+[2025-09-04T10:11:43.612Z] ✅ Success: 1107 characters transcribed
+[2025-09-04T10:11:43.612Z] 📊 Session progress: 4 total (4 success, 0 failed)
+[2025-09-04T10:11:43.612Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:11:49.613Z] 📄 Processing 5/20: MAR_wartime_letters_430216 part 3
+[2025-09-04T10:12:15.155Z] ✅ Success: 960 characters transcribed
+[2025-09-04T10:12:15.155Z] 📊 Session progress: 5 total (5 success, 0 failed)
+[2025-09-04T10:12:15.155Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:12:21.157Z] 📄 Processing 6/20: MAR_wartime_letters_430217 part 1
+[2025-09-04T10:12:37.990Z] ✅ Success: 934 characters transcribed
+[2025-09-04T10:12:37.990Z] 📊 Session progress: 6 total (6 success, 0 failed)
+[2025-09-04T10:12:37.990Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:12:43.991Z] 📄 Processing 7/20: MAR_wartime_letters_430217 part 2
+[2025-09-04T10:13:10.382Z] ✅ Success: 852 characters transcribed
+[2025-09-04T10:13:10.382Z] 📊 Session progress: 7 total (7 success, 0 failed)
+[2025-09-04T10:13:10.382Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:13:16.383Z] 📄 Processing 8/20: MAR_wartime_letters_430217 part 3
+[2025-09-04T10:13:43.811Z] ✅ Success: 755 characters transcribed
+[2025-09-04T10:13:43.811Z] 📊 Session progress: 8 total (8 success, 0 failed)
+[2025-09-04T10:13:43.811Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:13:49.812Z] 📄 Processing 9/20: MAR_wartime_letters_430502 part 2
+[2025-09-04T10:14:14.621Z] ✅ Success: 1722 characters transcribed
+[2025-09-04T10:14:14.622Z] 📊 Session progress: 9 total (9 success, 0 failed)
+[2025-09-04T10:14:14.622Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:14:20.623Z] 📄 Processing 10/20: MAR_wartime_letters_430502 part 3
+[2025-09-04T10:14:46.763Z] ✅ Success: 1090 characters transcribed
+[2025-09-04T10:14:46.763Z] 📊 Session progress: 10 total (10 success, 0 failed)
+[2025-09-04T10:14:46.763Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:14:52.763Z] 📄 Processing 11/20: MAR_wartime_letters_430503 part 1
+[2025-09-04T10:15:16.914Z] ✅ Success: 731 characters transcribed
+[2025-09-04T10:15:16.914Z] 📊 Session progress: 11 total (11 success, 0 failed)
+[2025-09-04T10:15:16.914Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:15:22.914Z] 📄 Processing 12/20: MAR_wartime_letters_430503 part 2
+[2025-09-04T10:15:56.847Z] ✅ Success: 1837 characters transcribed
+[2025-09-04T10:15:56.847Z] 📊 Session progress: 12 total (12 success, 0 failed)
+[2025-09-04T10:15:56.847Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:16:02.848Z] 📄 Processing 13/20: MAR_wartime_letters_430503 part 3
+[2025-09-04T10:16:29.324Z] ✅ Success: 1025 characters transcribed
+[2025-09-04T10:16:29.325Z] 📊 Session progress: 13 total (13 success, 0 failed)
+[2025-09-04T10:16:29.325Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:16:35.325Z] 📄 Processing 14/20: MAR_wartime_letters_430503 part 4
+[2025-09-04T10:17:02.588Z] ✅ Success: 941 characters transcribed
+[2025-09-04T10:17:02.589Z] 📊 Session progress: 14 total (14 success, 0 failed)
+[2025-09-04T10:17:02.589Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:17:08.590Z] 📄 Processing 15/20: MAR_wartime_letters_430507 part 1
+[2025-09-04T10:17:22.205Z] ✅ Success: 792 characters transcribed
+[2025-09-04T10:17:22.205Z] 📊 Session progress: 15 total (15 success, 0 failed)
+[2025-09-04T10:17:22.205Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:17:28.206Z] 📄 Processing 16/20: MAR_wartime_letters_430507 part 2
+[2025-09-04T10:18:00.413Z] ✅ Success: 1967 characters transcribed
+[2025-09-04T10:18:00.413Z] 📊 Session progress: 16 total (16 success, 0 failed)
+[2025-09-04T10:18:00.413Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:18:06.413Z] 📄 Processing 17/20: MAR_wartime_letters_430507 part 3
+[2025-09-04T10:18:53.072Z] ✅ Success: 962 characters transcribed
+[2025-09-04T10:18:53.072Z] 📊 Session progress: 17 total (17 success, 0 failed)
+[2025-09-04T10:18:53.072Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:18:59.072Z] 📄 Processing 18/20: MAR_wartime_letters_430508 part 1
+[2025-09-04T10:19:24.630Z] ✅ Success: 758 characters transcribed
+[2025-09-04T10:19:24.630Z] 📊 Session progress: 18 total (18 success, 0 failed)
+[2025-09-04T10:19:24.631Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:19:30.630Z] 📄 Processing 19/20: MAR_wartime_letters_430508 part 2
+[2025-09-04T10:20:03.732Z] ✅ Success: 1841 characters transcribed
+[2025-09-04T10:20:03.732Z] 📊 Session progress: 19 total (19 success, 0 failed)
+[2025-09-04T10:20:03.732Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:20:09.733Z] 📄 Processing 20/20: MAR_wartime_letters_430508 part 3
+[2025-09-04T10:20:34.707Z] ✅ Success: 931 characters transcribed
+[2025-09-04T10:20:34.707Z] 📊 Session progress: 20 total (20 success, 0 failed)
+[2025-09-04T10:20:34.707Z] 🎯 Batch complete: 20 successful, 0 failed
+[2025-09-04T10:20:34.707Z] ✅ Batch #1 completed
+[2025-09-04T10:20:34.709Z] 📈 Current statistics: 634 completed, 96 pending, 0 failed
+[2025-09-04T10:20:34.709Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T10:21:04.710Z] 
+🚀 Starting batch #2
+[2025-09-04T10:21:04.710Z] 🔍 Looking for 20 pending files...
+[2025-09-04T10:21:04.713Z] 📋 Found 5 pending files to process
+[2025-09-04T10:21:04.713Z] 📄 Processing 1/5: MAR_wartime_letters_430508 part 4
+[2025-09-04T10:21:32.239Z] ✅ Success: 657 characters transcribed
+[2025-09-04T10:21:32.239Z] 📊 Session progress: 21 total (21 success, 0 failed)
+[2025-09-04T10:21:32.239Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:21:38.239Z] 📄 Processing 2/5: MAR_wartime_letters_430510 part 1
+[2025-09-04T10:21:58.498Z] ✅ Success: 745 characters transcribed
+[2025-09-04T10:21:58.498Z] 📊 Session progress: 22 total (22 success, 0 failed)
+[2025-09-04T10:21:58.498Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:22:04.498Z] 📄 Processing 3/5: MAR_wartime_letters_430510 part 2
+[2025-09-04T10:22:20.331Z] ✅ Success: 173 characters transcribed
+[2025-09-04T10:22:20.332Z] 📊 Session progress: 23 total (23 success, 0 failed)
+[2025-09-04T10:22:20.332Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:22:26.333Z] 📄 Processing 4/5: MAR_wartime_letters_430816 part 1
+[2025-09-04T10:22:53.376Z] ✅ Success: 1780 characters transcribed
+[2025-09-04T10:22:53.376Z] 📊 Session progress: 24 total (24 success, 0 failed)
+[2025-09-04T10:22:53.376Z] ⏳ Waiting 6s before next file...
+[2025-09-04T10:22:59.376Z] 📄 Processing 5/5: MAR_wartime_letters_450423 part 4
+[2025-09-04T10:23:21.035Z] ✅ Success: 658 characters transcribed
+[2025-09-04T10:23:21.036Z] 📊 Session progress: 25 total (25 success, 0 failed)
+[2025-09-04T10:23:21.036Z] 🎯 Batch complete: 5 successful, 0 failed
+[2025-09-04T10:23:21.036Z] ✅ Batch #2 completed
+[2025-09-04T10:23:21.038Z] 📈 Current statistics: 639 completed, 91 pending, 0 failed
+[2025-09-04T10:23:21.039Z] ⏳ Waiting 30s before next batch...
+[2025-09-04T10:23:51.040Z] 
+🚀 Starting batch #3
+[2025-09-04T10:23:51.040Z] 🔍 Looking for 20 pending files...
+[2025-09-04T10:23:51.041Z] ✅ No more pending files found. All transcriptions complete!
+[2025-09-04T10:23:51.041Z] 🎉 All transcriptions completed! Session finished.
+[2025-09-04T10:23:51.041Z] 🧹 Cleaning up background transcriber...
+[2025-09-04T10:23:51.042Z] 📊 Session summary:
+[2025-09-04T10:23:51.042Z]    Duration: 798s
+[2025-09-04T10:23:51.042Z]    Total processed: 25
+[2025-09-04T10:23:51.042Z]    Total successful: 25
+[2025-09-04T10:23:51.042Z]    Total failed: 0
+[2025-09-04T10:23:51.042Z]    Success rate: 100%
+[2025-09-04T10:23:51.043Z] ✅ Background transcriber stopped cleanly

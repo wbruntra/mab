@@ -1,0 +1,8 @@
+wartime-*/
+node_modules/
+batch-framework/
+poep-wartime/
+logs/
+*.sqlite3
+secrets.js
+.env
