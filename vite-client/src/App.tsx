@@ -601,9 +601,9 @@ const DocumentDetail = () => {
                     <div className="card-body">
                       <div className="row">
                         <div className="col-12">
-                          <h6 className="text-muted mb-2">Transcription:</h6>
-                          <div className="transcription-text bg-light p-3 rounded">
-                            <pre className="mb-0">{file.transcription}</pre>
+                          {/* <h6 className="text-muted mb-2">Transcription:</h6> */}
+                          <div className="transcription-text">
+                            {file.transcription}
                           </div>
                         </div>
                       </div>

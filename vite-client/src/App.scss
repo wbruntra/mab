@@ -131,9 +131,17 @@ body {
 }
 
 .transcription-text {
-  font-family: Georgia, serif;
-  line-height: 1.6;
+  font-family: 'Crimson Text', 'Source Serif Pro', Georgia, serif;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: #2c3e50;
   white-space: pre-wrap;
+  letter-spacing: 0.02em;
+  padding: 1.5rem;
+  background-color: #fefefe;
+  border-left: 4px solid #e9ecef;
+  border-radius: 0.375rem;
+  margin: 1rem 0;
 }
 
 // Navigation enhancements
