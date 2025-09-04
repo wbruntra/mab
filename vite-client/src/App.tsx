@@ -379,12 +379,12 @@ const Documents = () => {
                     >
                       <i className="bi bi-clock me-1"></i>Show Partial
                     </button>
-                    <button 
+                    {/* <button 
                       className="btn btn-info btn-sm"
                       onClick={() => updateFilters({ ...documentFilters, year: '1943', page: 1 })}
                     >
                       <i className="bi bi-calendar me-1"></i>1943 (Most Completed)
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
