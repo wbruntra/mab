@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=william
 WorkingDirectory=/home/william/personal/mab
-ExecStart=/usr/bin/bun api-server.js
+ExecStart=/home/william/.bun/bin/bun api-server.js
 Environment=PORT=8404
 Environment=NODE_ENV=development
 StandardInput=null
