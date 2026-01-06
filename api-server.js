@@ -18,16 +18,8 @@ const cookieOpts = {
 
 app.use(cookieSession(cookieOpts))
 
-// Middleware
-// app.use(
-//   cors({
-//     origin: 'http://localhost:5174', // Vite dev server
-//     credentials: true,
-//   }),
-// )
 app.use(express.json())
 
-// Auth Routes (these don't require authentication)
 app.post('/api/auth/login', (req, res) => {
   const { password: inputPassword } = req.body
 

@@ -33,7 +33,7 @@ class GeminiTranscriptionService extends BaseTranscriptionService {
   constructor() {
     super('gemini')
     this.ai = new GoogleGenAI({ apiKey: secrets.GEMINI_API_KEY })
-    this.model = 'gemini-2.5-flash'
+    this.model = 'gemini-3-flash-preview'
   }
 
   async transcribe(filePath) {

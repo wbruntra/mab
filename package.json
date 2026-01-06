@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scan": "node transcription-manager.js scan",
-    "list": "node transcription-manager.js list",
-    "transcribe": "node transcription-manager.js transcribe",
-    "server": "node api-server.js",
-    "dev": "nodemon api-server.js"
+    "scan": "bun transcription-manager.js scan",
+    "list": "bun transcription-manager.js list",
+    "transcribe": "bun transcription-manager.js transcribe",
+    "server": "bun api-server.js",
+    "dev": "bun --watch api-server.js"
   },
   "keywords": [],
   "author": "",
