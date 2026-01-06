@@ -9,7 +9,9 @@ WorkingDirectory=/home/william/personal/mab
 ExecStart=/usr/bin/bun api-server.js
 Environment=PORT=8404
 Environment=NODE_ENV=development
-StandardInput=socket
+StandardInput=null
+StandardOutput=journal
+StandardError=journal
 Restart=no
 
 [Install]
