@@ -9,6 +9,7 @@ module.exports = {
 
       "instances": 1,
       "autorestart": true,
+      "stop_exit_codes": [0],
       "watch": false,
       "max_memory_restart": "1G",
       "env": {
