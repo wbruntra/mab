@@ -1,0 +1,9 @@
+[Unit]
+Description=MAB API Socket
+
+[Socket]
+ListenStream=8404
+NoDelay=true
+
+[Install]
+WantedBy=sockets.target

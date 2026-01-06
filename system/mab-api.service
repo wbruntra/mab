@@ -1,0 +1,16 @@
+[Unit]
+Description=MAB API Service
+After=network.target
+
+[Service]
+Type=simple
+User=william
+WorkingDirectory=/home/william/personal/mab
+ExecStart=/usr/bin/bun api-server.js
+Environment=PORT=8404
+Environment=NODE_ENV=development
+StandardInput=socket
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
