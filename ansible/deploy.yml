@@ -1,0 +1,47 @@
+---
+- name: Deploy mab
+  hosts: gaybor_new
+  vars:
+    project_root: '/home/{{ ansible_user }}/personal/mab'
+    target_branch: master
+    pm2_app_name: mab-api-server
+    pm2_node_version: v24.12.0
+    bun_bin_dir: '/home/{{ ansible_user }}/.bun/bin'
+    node_bin_dir: '/home/{{ ansible_user }}/.nvm/versions/node/{{ pm2_node_version }}/bin'
+    deploy_path: '{{ node_bin_dir }}:{{ bun_bin_dir }}:{{ ansible_env.PATH }}'
+
+  environment:
+    PATH: '{{ deploy_path }}'
+
+  tasks:
+    - name: 1. Update repository
+      git:
+        repo: git@github.com:wbruntra/mab.git
+        dest: '{{ project_root }}'
+        version: '{{ target_branch }}'
+        force: yes
+      tags: [git, update]
+
+    - name: 2. Install server dependencies
+      command: bun install
+      args:
+        chdir: '{{ project_root }}'
+      tags: [deps, install]
+
+    - name: 3. Install frontend dependencies
+      command: bun install
+      args:
+        chdir: '{{ project_root }}/vite-client'
+      tags: [build, frontend]
+
+    - name: 4. Build frontend
+      command: bun run build
+      args:
+        chdir: '{{ project_root }}/vite-client'
+      tags: [build, frontend]
+
+    - name: 5. Reload backend (PM2)
+      command: pm2 startOrReload ecosystem.config.js --only {{ pm2_app_name }}
+      args:
+        chdir: '{{ project_root }}'
+      tags: [pm2, restart]

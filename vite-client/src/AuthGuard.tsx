@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import type { ReactNode } from 'react'
 import { useAuth } from './AuthContext'
 import { LoginModal } from './LoginModal'
@@ -24,7 +25,8 @@ export const AuthGuard = ({ children }: AuthGuardProps) => {
 
   return (
     <>
-      {children}
+      {/* Remount children on auth change so their initial queries re-run after login */}
+      <Fragment key={isAuthenticated ? 'authed' : 'anon'}>{children}</Fragment>
       <LoginModal show={!isAuthenticated} />
     </>
   )
