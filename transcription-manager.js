@@ -32,14 +32,14 @@ class TranscriptionManager {
 
     for (const year of years) {
       const originalsDir = path.join(__dirname, `wartime-${year}`, 'originals')
-      
+
       if (!fs.existsSync(originalsDir)) {
         console.log(`Directory not found: ${originalsDir}`)
         continue
       }
 
       const files = fs.readdirSync(originalsDir)
-      
+
       for (const file of files) {
         if (!file.endsWith('.pdf')) continue
 
@@ -53,7 +53,7 @@ class TranscriptionManager {
         const [, prefix, type, dateCode, partNum] = match
         const date = `19${dateCode.substring(0, 2)}-${dateCode.substring(2, 4)}-${dateCode.substring(4, 6)}`
         const documentKey = `${prefix}_${type}_${dateCode}`
-        
+
         if (!documents.has(documentKey)) {
           documents.set(documentKey, {
             document_key: documentKey,
@@ -61,18 +61,18 @@ class TranscriptionManager {
             type: type,
             year: parseInt(`19${dateCode.substring(0, 2)}`),
             files: [],
-            source_files: []
+            source_files: [],
           })
         }
 
         const doc = documents.get(documentKey)
         const filePath = path.join(originalsDir, file)
         const stats = fs.statSync(filePath)
-        
+
         doc.files.push({
           file_path: filePath,
           part_number: partNum ? parseInt(partNum) : 1,
-          file_size: stats.size
+          file_size: stats.size,
         })
         doc.source_files.push(filePath)
       }
@@ -96,7 +96,7 @@ class TranscriptionManager {
               type: doc.type,
               year: doc.year,
               source_files: JSON.stringify(doc.source_files),
-              updated_at: new Date()
+              updated_at: new Date(),
             })
           documentId = existingDoc.id
         } else {
@@ -107,23 +107,23 @@ class TranscriptionManager {
             type: doc.type,
             year: doc.year,
             source_files: JSON.stringify(doc.source_files),
-            transcription_status: 'pending'
+            transcription_status: 'pending',
           })
           documentId = newId
         }
 
         // Clear existing files for this document
         await this.db('document_files').where('document_id', documentId).del()
-        
+
         // Insert files for this document
         if (doc.files.length > 0) {
           await this.db('document_files').insert(
-            doc.files.map(file => ({
+            doc.files.map((file) => ({
               document_id: documentId,
               file_path: file.file_path,
               part_number: file.part_number,
-              file_size: file.file_size
-            }))
+              file_size: file.file_size,
+            })),
           )
         }
       } catch (error) {
@@ -135,11 +135,18 @@ class TranscriptionManager {
     return documents.size
   }
 
-    // Get pending files for transcription with optional filtering
+  // Get pending files for transcription with optional filtering
   async getPendingFiles(limit = 10, typeFilter = null) {
     let query = this.db('document_files as df')
       .join('documents as d', 'df.document_id', 'd.id')
-      .select('df.id', 'df.file_path', 'df.part_number', 'd.document_key', 'd.type', 'df.transcription_status')
+      .select(
+        'df.id',
+        'df.file_path',
+        'df.part_number',
+        'd.document_key',
+        'd.type',
+        'df.transcription_status',
+      )
       .where('df.transcription_status', 'pending')
 
     if (typeFilter) {
@@ -155,7 +162,7 @@ class TranscriptionManager {
   async createTranscriptionBatch(files, batchSize = 50) {
     try {
       console.log(`Creating batch transcription job for ${files.length} files`)
-      
+
       // Generate transcription prompt for a file
       const generateTranscriptionPrompt = (file) => {
         const fileInfo = `${file.document_key} (${file.date}) - Part ${file.part_number}`
@@ -174,10 +181,10 @@ Please provide the transcription as plain text.`
       }
 
       // Create JSONL content - one request per file
-      const jsonlLines = files.map(file => {
+      const jsonlLines = files.map((file) => {
         // Read and encode the PDF file
         const pdfBase64 = fs.readFileSync(file.file_path).toString('base64')
-        
+
         return JSON.stringify({
           custom_id: `transcribe-file-${file.id}`,
           method: 'POST',
@@ -191,44 +198,44 @@ Please provide the transcription as plain text.`
                   {
                     type: 'input_file',
                     filename: path.basename(file.file_path),
-                    file_data: `data:application/pdf;base64,${pdfBase64}`
+                    file_data: `data:application/pdf;base64,${pdfBase64}`,
                   },
                   {
                     type: 'input_text',
-                    text: generateTranscriptionPrompt(file)
-                  }
-                ]
-              }
-            ]
-          }
+                    text: generateTranscriptionPrompt(file),
+                  },
+                ],
+              },
+            ],
+          },
         })
       })
-      
+
       // Write to temporary file
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
       const filename = `transcription-batch-${timestamp}.jsonl`
       const filepath = path.join('.', filename)
-      
+
       fs.writeFileSync(filepath, jsonlLines.join('\n'))
       console.log(`📁 Created transcription batch file: ${filename}`)
-      
+
       // Upload file to OpenAI
       const file = await this.openai.files.create({
         file: fs.createReadStream(filepath),
-        purpose: 'batch'
+        purpose: 'batch',
       })
-      
+
       console.log(`⬆️  Uploaded file: ${file.id}`)
-      
+
       // Create batch job
       const batch = await this.openai.batches.create({
         input_file_id: file.id,
         endpoint: '/v1/responses',
-        completion_window: '24h'
+        completion_window: '24h',
       })
-      
+
       console.log(`🚀 Created batch: ${batch.id}`)
-      
+
       // Save to transcription_batches table (create if needed)
       await this.ensureTranscriptionBatchTable()
       await this.db('transcription_batches').insert({
@@ -237,24 +244,21 @@ Please provide the transcription as plain text.`
         input_file_id: file.id,
         request_count: files.length,
         description: `PDF transcription batch - ${files.length} files`,
-        file_ids: JSON.stringify(files.map(f => f.id))
+        file_ids: JSON.stringify(files.map((f) => f.id)),
       })
 
       // Mark files as submitted for transcription
-      const fileIds = files.map(f => f.id)
-      await this.db('document_files')
-        .whereIn('id', fileIds)
-        .update({
-          transcription_status: 'submitted',
-          updated_at: new Date()
-        })
+      const fileIds = files.map((f) => f.id)
+      await this.db('document_files').whereIn('id', fileIds).update({
+        transcription_status: 'submitted',
+        updated_at: new Date(),
+      })
 
       // Clean up local file
       fs.unlinkSync(filepath)
 
       console.log(`✅ Batch transcription job created: ${batch.id}`)
       return batch.id
-
     } catch (error) {
       console.error('Error creating transcription batch:', error.message)
       throw error
@@ -264,7 +268,7 @@ Please provide the transcription as plain text.`
   async ensureTranscriptionBatchTable() {
     const hasTable = await this.db.schema.hasTable('transcription_batches')
     if (!hasTable) {
-      await this.db.schema.createTable('transcription_batches', table => {
+      await this.db.schema.createTable('transcription_batches', (table) => {
         table.increments('id').primary()
         table.string('batch_id').unique().notNullable()
         table.string('status').notNullable()
@@ -288,49 +292,49 @@ Please provide the transcription as plain text.`
   async processTranscriptionResults() {
     try {
       await this.ensureTranscriptionBatchTable()
-      
+
       // Get completed unprocessed transcription batches
       const batches = await this.db('transcription_batches')
         .where('status', 'completed')
         .whereNull('processed_at')
-      
+
       if (batches.length === 0) {
         console.log('No completed unprocessed transcription batches found')
         return { processedCount: 0, errorCount: 0 }
       }
-      
+
       console.log(`📥 Processing ${batches.length} completed transcription batch(es)...`)
-      
+
       let totalProcessed = 0
       let totalErrors = 0
-      
+
       for (const batch of batches) {
         console.log(`\n📋 Processing batch: ${batch.batch_id}`)
-        
+
         if (!batch.output_file_id) {
           console.log('   ⚠️  No output file available')
           continue
         }
-        
+
         // Download results
         const fileResponse = await this.openai.files.content(batch.output_file_id)
         const fileContents = await fileResponse.text()
-        
+
         console.log('   📄 Downloaded results file')
-        
+
         // Process each line
         const lines = fileContents.trim().split('\n')
         let batchProcessed = 0
         let batchErrors = 0
-        
+
         for (const line of lines) {
           try {
             const result = JSON.parse(line)
-            
+
             if (result.error) {
               console.log(`   ❌ Request error: ${result.custom_id} - ${result.error.message}`)
               batchErrors++
-              
+
               // Mark file as failed
               const fileIdMatch = result.custom_id.match(/transcribe-file-(\d+)/)
               if (fileIdMatch) {
@@ -342,23 +346,32 @@ Please provide the transcription as plain text.`
                     transcription_metadata: JSON.stringify({
                       error: result.error.message,
                       failed_at: new Date().toISOString(),
-                      batch_id: batch.batch_id
+                      batch_id: batch.batch_id,
                     }),
-                    updated_at: new Date()
+                    updated_at: new Date(),
                   })
               }
               continue
             }
-            
+
             // Extract transcription from response (Responses API format)
             let transcription
             if (result.response.body.output && Array.isArray(result.response.body.output)) {
               // Find the message output
-              const messageOutput = result.response.body.output.find(item => item.type === 'message')
-              if (messageOutput && messageOutput.content && messageOutput.content[0] && messageOutput.content[0].type === 'output_text') {
+              const messageOutput = result.response.body.output.find(
+                (item) => item.type === 'message',
+              )
+              if (
+                messageOutput &&
+                messageOutput.content &&
+                messageOutput.content[0] &&
+                messageOutput.content[0].type === 'output_text'
+              ) {
                 transcription = messageOutput.content[0].text.trim()
               } else {
-                console.log(`   ⚠️  No valid message content found in response for ${result.custom_id}`)
+                console.log(
+                  `   ⚠️  No valid message content found in response for ${result.custom_id}`,
+                )
                 batchErrors++
                 continue
               }
@@ -366,11 +379,13 @@ Please provide the transcription as plain text.`
               // Direct output_text format
               transcription = result.response.body.output_text.trim()
             } else {
-              console.log(`   ⚠️  No transcription content found in response for ${result.custom_id}`)
+              console.log(
+                `   ⚠️  No transcription content found in response for ${result.custom_id}`,
+              )
               batchErrors++
               continue
             }
-            
+
             // Extract file ID from custom_id
             const fileIdMatch = result.custom_id.match(/transcribe-file-(\d+)/)
             if (!fileIdMatch) {
@@ -378,15 +393,15 @@ Please provide the transcription as plain text.`
               batchErrors++
               continue
             }
-            
+
             const fileId = parseInt(fileIdMatch[1])
-            
+
             const metadata = {
               service: 'openai',
               model: 'gpt-5',
               transcribed_at: new Date().toISOString(),
               batch_id: batch.batch_id,
-              custom_id: result.custom_id
+              custom_id: result.custom_id,
             }
 
             // Update document_files table with transcription
@@ -396,31 +411,31 @@ Please provide the transcription as plain text.`
                 transcription: transcription,
                 transcription_status: 'completed',
                 transcription_metadata: JSON.stringify(metadata),
-                updated_at: new Date()
+                updated_at: new Date(),
               })
 
             console.log(`   ✅ Transcribed file ID ${fileId}`)
             batchProcessed++
-            
           } catch (lineError) {
             console.error(`   ❌ Error processing line:`, lineError.message)
             batchErrors++
           }
         }
-        
+
         // Mark batch as processed
         await this.db('transcription_batches')
           .where('batch_id', batch.batch_id)
           .update({ processed_at: new Date() })
-        
+
         console.log(`   📊 Processed ${batchProcessed}/${lines.length} transcriptions`)
         totalProcessed += batchProcessed
         totalErrors += batchErrors
       }
-      
-      console.log(`\n🎉 Transcription processing complete: ${totalProcessed} transcribed, ${totalErrors} errors`)
+
+      console.log(
+        `\n🎉 Transcription processing complete: ${totalProcessed} transcribed, ${totalErrors} errors`,
+      )
       return { processedCount: totalProcessed, errorCount: totalErrors }
-      
     } catch (error) {
       console.error('❌ Error processing transcription results:', error.message)
       throw error
@@ -431,34 +446,36 @@ Please provide the transcription as plain text.`
   async checkTranscriptionBatches() {
     try {
       await this.ensureTranscriptionBatchTable()
-      
+
       // Get unprocessed batches
       const batches = await this.db('transcription_batches')
         .whereNull('processed_at')
         .orderBy('submitted_at', 'desc')
-      
+
       if (batches.length === 0) {
         console.log('No transcription batches found to check')
         return
       }
-      
+
       console.log(`🔍 Checking ${batches.length} transcription batch(es)...`)
-      
+
       for (const batch of batches) {
         console.log(`\n📋 Batch: ${batch.batch_id}`)
         console.log(`   Description: ${batch.description}`)
         console.log(`   Current status: ${batch.status}`)
-        
+
         // Get latest status from OpenAI
         const apiBatch = await this.openai.batches.retrieve(batch.batch_id)
-        
+
         console.log(`   API status: ${apiBatch.status}`)
-        console.log(`   Requests: ${apiBatch.request_counts.completed}/${apiBatch.request_counts.total} completed`)
-        
+        console.log(
+          `   Requests: ${apiBatch.request_counts.completed}/${apiBatch.request_counts.total} completed`,
+        )
+
         if (apiBatch.request_counts.failed > 0) {
           console.log(`   ⚠️  Failed: ${apiBatch.request_counts.failed}`)
         }
-        
+
         // Update database if status changed
         if (apiBatch.status !== batch.status) {
           await this.db('transcription_batches')
@@ -469,13 +486,12 @@ Please provide the transcription as plain text.`
               error_file_id: apiBatch.error_file_id,
               completed_count: apiBatch.request_counts.completed,
               failed_count: apiBatch.request_counts.failed,
-              completed_at: apiBatch.completed_at ? new Date(apiBatch.completed_at * 1000) : null
+              completed_at: apiBatch.completed_at ? new Date(apiBatch.completed_at * 1000) : null,
             })
-          
+
           console.log(`   📝 Updated status: ${batch.status} → ${apiBatch.status}`)
         }
       }
-      
     } catch (error) {
       console.error('❌ Error checking transcription batch status:', error.message)
       throw error
@@ -486,26 +502,26 @@ Please provide the transcription as plain text.`
   async cleanupFailedBatches() {
     try {
       await this.ensureTranscriptionBatchTable()
-      
+
       // Get failed batches
       const failedBatches = await this.db('transcription_batches')
         .where('status', 'completed')
         .where('failed_count', '>', 0)
         .whereNull('processed_at')
-      
+
       if (failedBatches.length === 0) {
         console.log('No failed batches found to clean up')
         return { cleanedFiles: 0, cleanedBatches: 0 }
       }
-      
+
       console.log(`🧹 Cleaning up ${failedBatches.length} failed batch(es)...`)
-      
+
       let totalCleanedFiles = 0
-      
+
       for (const batch of failedBatches) {
         console.log(`\n📋 Cleaning batch: ${batch.batch_id}`)
         console.log(`   Failed count: ${batch.failed_count}`)
-        
+
         // Parse file IDs from JSON
         let fileIds = []
         try {
@@ -515,31 +531,28 @@ Please provide the transcription as plain text.`
           console.log(`   ⚠️  Could not parse file IDs: ${batch.file_ids}`)
           continue
         }
-        
+
         // Reset file statuses back to pending
-        await this.db('document_files')
-          .whereIn('id', fileIds)
-          .update({
-            transcription_status: 'pending',
-            transcription_metadata: null,
-            updated_at: new Date()
-          })
-        
+        await this.db('document_files').whereIn('id', fileIds).update({
+          transcription_status: 'pending',
+          transcription_metadata: null,
+          updated_at: new Date(),
+        })
+
         console.log(`   ✅ Reset ${fileIds.length} files to pending status`)
         totalCleanedFiles += fileIds.length
-        
+
         // Mark batch as cleaned up
         await this.db('transcription_batches')
           .where('batch_id', batch.batch_id)
-          .update({ 
+          .update({
             processed_at: new Date(),
-            description: batch.description + ' [CLEANED UP - FAILED]'
+            description: batch.description + ' [CLEANED UP - FAILED]',
           })
       }
-      
+
       console.log(`\n🎉 Cleanup complete: ${totalCleanedFiles} files reset to pending`)
       return { cleanedFiles: totalCleanedFiles, cleanedBatches: failedBatches.length }
-      
     } catch (error) {
       console.error('❌ Error cleaning up failed batches:', error.message)
       throw error
@@ -554,16 +567,16 @@ Please provide the transcription as plain text.`
       .groupBy('transcription_status')
 
     const total = await this.db('document_files').count('* as count').first()
-    
+
     const result = {
       total: total.count,
       pending: 0,
       submitted: 0,
       completed: 0,
-      failed: 0
+      failed: 0,
     }
 
-    stats.forEach(stat => {
+    stats.forEach((stat) => {
       result[stat.transcription_status] = parseInt(stat.count)
     })
 
@@ -581,11 +594,11 @@ Please provide the transcription as plain text.`
     if (filters.year) {
       query = query.where('d.year', filters.year)
     }
-    
+
     if (filters.type) {
       query = query.where('d.type', filters.type)
     }
-    
+
     if (filters.status) {
       query = query.where('d.transcription_status', filters.status)
     }
@@ -618,7 +631,7 @@ Please provide the transcription as plain text.`
     // If multiple files, we'll need to combine them or process individually
     // For now, let's process the first file as a test
     const firstFile = files[0]
-    
+
     if (!fs.existsSync(firstFile.file_path)) {
       throw new Error(`File not found: ${firstFile.file_path}`)
     }
@@ -654,8 +667,8 @@ Please provide the transcription as plain text.`
         service: 'openai',
         model: 'gpt-5',
         transcribed_at: new Date().toISOString(),
-        files_processed: files.map(f => f.file_path),
-        file_count: files.length
+        files_processed: files.map((f) => f.file_path),
+        file_count: files.length,
       }
 
       // Update database
@@ -665,7 +678,7 @@ Please provide the transcription as plain text.`
           transcription: transcription,
           transcription_status: 'completed',
           metadata: JSON.stringify(metadata),
-          updated_at: new Date()
+          updated_at: new Date(),
         })
 
       console.log(`Successfully transcribed document: ${doc.document_key}`)
@@ -673,20 +686,19 @@ Please provide the transcription as plain text.`
         documentId,
         documentKey: doc.document_key,
         transcription,
-        metadata
+        metadata,
       }
-
     } catch (error) {
       // Mark as failed
       await this.db('documents')
         .where('id', documentId)
         .update({
           transcription_status: 'failed',
-          metadata: JSON.stringify({ 
-            error: error.message, 
-            failed_at: new Date().toISOString() 
+          metadata: JSON.stringify({
+            error: error.message,
+            failed_at: new Date().toISOString(),
           }),
-          updated_at: new Date()
+          updated_at: new Date(),
         })
       throw error
     }
@@ -705,28 +717,30 @@ module.exports = TranscriptionManager
 // CLI usage
 if (require.main === module) {
   const manager = new TranscriptionManager()
-  
+
   const command = process.argv[2]
-  
+
   async function main() {
     try {
       await manager.init()
-      
+
       switch (command) {
         case 'scan':
           const count = await manager.scanAndPopulateDocuments()
           console.log(`Scanned and found ${count} documents`)
           break
-          
+
         case 'list':
           const filters = {}
           if (process.argv[3]) filters.year = parseInt(process.argv[3])
           if (process.argv[4]) filters.type = process.argv[4]
-          
+
           const docs = await manager.getDocuments(filters)
           console.log('\nDocuments:')
-          docs.forEach(doc => {
-            console.log(`${doc.id}: ${doc.document_key} (${doc.date}) - ${doc.transcription_status} - ${doc.file_count} files`)
+          docs.forEach((doc) => {
+            console.log(
+              `${doc.id}: ${doc.document_key} (${doc.date}) - ${doc.transcription_status} - ${doc.file_count} files`,
+            )
           })
           break
 
@@ -734,8 +748,10 @@ if (require.main === module) {
           const limit = process.argv[3] ? parseInt(process.argv[3]) : 20
           const files = await manager.getPendingFiles(limit)
           console.log(`\nPending files for transcription (showing first ${limit}):`)
-          files.forEach(file => {
-            console.log(`${file.id}: ${file.document_key} - Part ${file.part_number} - ${file.transcription_status}`)
+          files.forEach((file) => {
+            console.log(
+              `${file.id}: ${file.document_key} - Part ${file.part_number} - ${file.transcription_status}`,
+            )
           })
           break
 
@@ -755,27 +771,34 @@ if (require.main === module) {
             console.log('Please provide either file IDs (comma-separated) or batch size')
             break
           }
-          
+
           let filesToProcess
           if (arg.includes(',')) {
             // Comma-separated file IDs
-            const fileIds = arg.split(',').map(id => parseInt(id.trim()))
+            const fileIds = arg.split(',').map((id) => parseInt(id.trim()))
             console.log(`Creating batch job for specific files: ${fileIds.join(', ')}`)
-            
+
             // Get the specific files
-            filesToProcess = await manager.db('document_files as df')
+            filesToProcess = await manager
+              .db('document_files as df')
               .join('documents as d', 'df.document_id', 'd.id')
-              .select('df.id', 'df.file_path', 'df.part_number', 'd.document_key', 'd.type', 'df.transcription_status')
+              .select(
+                'df.id',
+                'df.file_path',
+                'df.part_number',
+                'd.document_key',
+                'd.type',
+                'df.transcription_status',
+              )
               .whereIn('df.id', fileIds)
               .where('df.transcription_status', 'pending')
-              
           } else {
             // Batch size
             const batchSize = parseInt(arg)
             console.log(`Creating batch job for ${batchSize} files`)
             filesToProcess = await manager.getPendingFiles(batchSize)
           }
-          
+
           if (filesToProcess.length === 0) {
             console.log('No pending files found for transcription')
           } else {
@@ -797,22 +820,24 @@ if (require.main === module) {
 
         case 'cleanup-failed':
           const cleanupResult = await manager.cleanupFailedBatches()
-          console.log(`Cleaned up ${cleanupResult.cleanedFiles} files from ${cleanupResult.cleanedBatches} failed batches`)
+          console.log(
+            `Cleaned up ${cleanupResult.cleanedFiles} files from ${cleanupResult.cleanedBatches} failed batches`,
+          )
           break
-          
+
         case 'transcribe':
           const docId = parseInt(process.argv[3])
           if (!docId) {
             console.error('Please provide a document ID')
             break
           }
-          
+
           const transcribeResult = await manager.transcribeDocument(docId)
           console.log(`\nTranscription completed for: ${transcribeResult.documentKey}`)
           console.log('\nTranscription preview:')
           console.log(transcribeResult.transcription.substring(0, 500) + '...')
           break
-          
+
         default:
           console.log('Usage:')
           console.log('  node transcription-manager.js scan')
@@ -831,7 +856,7 @@ if (require.main === module) {
       await manager.close()
     }
   }
-  
+
   main().then(() => {
     process.exit(0)
   })

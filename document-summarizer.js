@@ -7,7 +7,7 @@ const db = require('./db_connection.js')
 class DocumentSummarizer {
   constructor() {
     this.client = new OpenAI({ apiKey: secrets.OPENAI_API_KEY })
-    this.model = 'gpt-5-mini'  // Latest model as requested
+    this.model = 'gpt-5-mini' // Latest model as requested
     this.db = db
   }
 
@@ -27,9 +27,7 @@ class DocumentSummarizer {
   // Get a document with all its transcribed files
   async getDocumentWithTranscriptions(documentId) {
     // Get document info
-    const document = await this.db('documents')
-      .where('id', documentId)
-      .first()
+    const document = await this.db('documents').where('id', documentId).first()
 
     if (!document) {
       throw new Error(`Document not found: ${documentId}`)
@@ -50,7 +48,7 @@ class DocumentSummarizer {
     return {
       document,
       files,
-      combinedTranscription: files.map(f => f.transcription).join('\n\n--- PAGE BREAK ---\n\n')
+      combinedTranscription: files.map((f) => f.transcription).join('\n\n--- PAGE BREAK ---\n\n'),
     }
   }
 
@@ -60,8 +58,9 @@ class DocumentSummarizer {
       console.log(`📄 Generating summary for document ID: ${documentId}`)
 
       // Get document and transcriptions
-      const { document, files, combinedTranscription } = await this.getDocumentWithTranscriptions(documentId)
-      
+      const { document, files, combinedTranscription } =
+        await this.getDocumentWithTranscriptions(documentId)
+
       console.log(`📋 Document: ${document.document_key}`)
       console.log(`📑 Found ${files.length} transcribed pages`)
       console.log(`📝 Total characters: ${combinedTranscription.length}`)
@@ -73,7 +72,7 @@ class DocumentSummarizer {
           success: true,
           summary: document.summary,
           metadata: JSON.parse(document.summary_metadata || '{}'),
-          alreadyExists: true
+          alreadyExists: true,
         }
       }
 
@@ -103,7 +102,7 @@ ${combinedTranscription}`
       })
 
       const summary = response.output_text.trim()
-      
+
       console.log(`✅ Generated summary (${summary.length} characters)`)
 
       // Save summary to database
@@ -113,7 +112,7 @@ ${combinedTranscription}`
         generated_at: new Date().toISOString(),
         source_files: files.length,
         total_characters: combinedTranscription.length,
-        summary_characters: summary.length
+        summary_characters: summary.length,
       }
 
       await this.db('documents')
@@ -121,7 +120,7 @@ ${combinedTranscription}`
         .update({
           summary: summary,
           summary_metadata: JSON.stringify(metadata),
-          updated_at: new Date()
+          updated_at: new Date(),
         })
 
       console.log(`💾 Saved summary to database`)
@@ -131,15 +130,14 @@ ${combinedTranscription}`
         summary,
         metadata,
         documentKey: document.document_key,
-        sourceFiles: files.length
+        sourceFiles: files.length,
       }
-
     } catch (error) {
       console.error(`❌ Error generating summary for document ${documentId}:`, error.message)
       return {
         success: false,
         error: error.message,
-        documentId
+        documentId,
       }
     }
   }
@@ -147,7 +145,7 @@ ${combinedTranscription}`
   // Generate summaries for multiple documents
   async generateBatchSummaries(documentIds, force = false) {
     console.log(`🚀 Starting batch summary generation for ${documentIds.length} documents`)
-    
+
     let processed = 0
     let successful = 0
     let failed = 0
@@ -158,19 +156,19 @@ ${combinedTranscription}`
       try {
         // Check if summary exists and force is not set
         if (!force) {
-          const existingDoc = await this.db('documents')
-            .where('id', documentId)
-            .first()
-          
+          const existingDoc = await this.db('documents').where('id', documentId).first()
+
           if (existingDoc && existingDoc.summary) {
-            console.log(`⏭️  Skipping document ${documentId} (${existingDoc.document_key}) - summary exists`)
+            console.log(
+              `⏭️  Skipping document ${documentId} (${existingDoc.document_key}) - summary exists`,
+            )
             skipped++
             processed++
             results.push({
               success: true,
               skipped: true,
               documentId,
-              documentKey: existingDoc.document_key
+              documentKey: existingDoc.document_key,
             })
             continue
           }
@@ -186,13 +184,14 @@ ${combinedTranscription}`
           failed++
         }
 
-        console.log(`📊 Progress: ${processed}/${documentIds.length} (${successful} success, ${failed} failed, ${skipped} skipped)`)
-        
+        console.log(
+          `📊 Progress: ${processed}/${documentIds.length} (${successful} success, ${failed} failed, ${skipped} skipped)`,
+        )
+
         // Small delay to avoid hitting rate limits
         if (processed < documentIds.length) {
-          await new Promise(resolve => setTimeout(resolve, 2000)) // 2 second delay
+          await new Promise((resolve) => setTimeout(resolve, 2000)) // 2 second delay
         }
-
       } catch (error) {
         console.error(`❌ Error processing document ${documentId}:`, error.message)
         failed++
@@ -200,20 +199,22 @@ ${combinedTranscription}`
         results.push({
           success: false,
           error: error.message,
-          documentId
+          documentId,
         })
       }
     }
 
     console.log(`\n🎉 Batch summary generation complete!`)
-    console.log(`📊 Final results: ${successful} successful, ${failed} failed, ${skipped} skipped out of ${processed} total`)
+    console.log(
+      `📊 Final results: ${successful} successful, ${failed} failed, ${skipped} skipped out of ${processed} total`,
+    )
 
     return {
       processed,
       successful,
       failed,
       skipped,
-      results
+      results,
     }
   }
 
@@ -222,7 +223,7 @@ ${combinedTranscription}`
     // First, get all documents with at least one completed transcription
     let baseQuery = this.db('documents as d')
       .select('d.id', 'd.document_key', 'd.date', 'd.type', 'd.summary')
-      .whereExists(function() {
+      .whereExists(function () {
         this.select('*')
           .from('document_files as df')
           .whereRaw('df.document_id = d.id')
@@ -243,14 +244,16 @@ ${combinedTranscription}`
         .where('document_id', doc.id)
         .select(
           this.db.raw('COUNT(*) as total_files'),
-          this.db.raw('SUM(CASE WHEN transcription_status = "completed" THEN 1 ELSE 0 END) as completed_files')
+          this.db.raw(
+            'SUM(CASE WHEN transcription_status = "completed" THEN 1 ELSE 0 END) as completed_files',
+          ),
         )
         .first()
 
       enrichedDocs.push({
         ...doc,
         total_files: parseInt(fileCounts.total_files || 0),
-        completed_files: parseInt(fileCounts.completed_files || 0)
+        completed_files: parseInt(fileCounts.completed_files || 0),
       })
     }
 
@@ -262,8 +265,12 @@ ${combinedTranscription}`
     const stats = await this.db('documents')
       .select(
         this.db.raw('COUNT(*) as total_documents'),
-        this.db.raw('SUM(CASE WHEN summary IS NOT NULL THEN 1 ELSE 0 END) as documents_with_summary'),
-        this.db.raw('SUM(CASE WHEN summary IS NULL THEN 1 ELSE 0 END) as documents_without_summary')
+        this.db.raw(
+          'SUM(CASE WHEN summary IS NOT NULL THEN 1 ELSE 0 END) as documents_with_summary',
+        ),
+        this.db.raw(
+          'SUM(CASE WHEN summary IS NULL THEN 1 ELSE 0 END) as documents_without_summary',
+        ),
       )
       .first()
 
@@ -274,7 +281,7 @@ ${combinedTranscription}`
       total_documents: parseInt(stats.total_documents),
       documents_with_summary: parseInt(stats.documents_with_summary),
       documents_without_summary: parseInt(stats.documents_without_summary),
-      documents_ready_for_summary: readyDocs.length
+      documents_ready_for_summary: readyDocs.length,
     }
   }
 
@@ -306,9 +313,11 @@ async function main() {
       case 'ready':
         const limit = arg1 ? parseInt(arg1) : 20
         const readyDocs = await summarizer.getDocumentsReadyForSummary(limit)
-        console.log(`\nDocuments ready for summarization (showing ${readyDocs.length}):`);
-        readyDocs.forEach(doc => {
-          console.log(`  ${doc.id}: ${doc.document_key} (${doc.completed_files}/${doc.total_files} files transcribed)`)
+        console.log(`\nDocuments ready for summarization (showing ${readyDocs.length}):`)
+        readyDocs.forEach((doc) => {
+          console.log(
+            `  ${doc.id}: ${doc.document_key} (${doc.completed_files}/${doc.total_files} files transcribed)`,
+          )
         })
         break
 
@@ -327,16 +336,16 @@ async function main() {
       case 'batch':
         const batchSize = arg1 ? parseInt(arg1) : 10
         const force = process.argv.includes('--force')
-        
+
         console.log(`Getting ${batchSize} documents ready for summarization...`)
         const docs = await summarizer.getDocumentsReadyForSummary(batchSize, force)
-        
+
         if (docs.length === 0) {
           console.log('No documents ready for summarization')
           break
         }
 
-        const docIds = docs.map(d => d.id)
+        const docIds = docs.map((d) => d.id)
         await summarizer.generateBatchSummaries(docIds, force)
         break
 
@@ -352,9 +361,10 @@ async function main() {
         console.log('  node document-summarizer.js ready 20')
         console.log('  node document-summarizer.js summarize 123')
         console.log('  node document-summarizer.js batch 10')
-        console.log('  node document-summarizer.js batch 5 --force  # Regenerate existing summaries')
+        console.log(
+          '  node document-summarizer.js batch 5 --force  # Regenerate existing summaries',
+        )
     }
-
   } catch (error) {
     console.error('Error:', error.message)
   } finally {

@@ -26,7 +26,9 @@ class UnifiedTranscriptionManager {
   // Switch transcription service
   switchService(serviceName) {
     if (!getAvailableServices().includes(serviceName)) {
-      throw new Error(`Unknown service: ${serviceName}. Available: ${getAvailableServices().join(', ')}`)
+      throw new Error(
+        `Unknown service: ${serviceName}. Available: ${getAvailableServices().join(', ')}`,
+      )
     }
     this.serviceName = serviceName
     this.transcriptionService = createTranscriptionService(serviceName)
@@ -37,10 +39,10 @@ class UnifiedTranscriptionManager {
   async transcribeFile(filePath, fileId = null, documentKey = null) {
     try {
       console.log(`📄 Transcribing: ${path.basename(filePath)} (using ${this.serviceName})`)
-      
+
       // Use the transcription service
       const result = await this.transcriptionService.transcribe(filePath)
-      
+
       console.log(`✅ Transcribed ${result.transcription.length} characters`)
 
       // If file ID provided, update database
@@ -51,7 +53,7 @@ class UnifiedTranscriptionManager {
             transcription: result.transcription,
             transcription_status: 'completed',
             transcription_metadata: JSON.stringify(result.metadata),
-            updated_at: new Date()
+            updated_at: new Date(),
           })
 
         console.log(`💾 Updated database for file ID ${fileId}`)
@@ -64,15 +66,14 @@ class UnifiedTranscriptionManager {
         service: this.serviceName,
         metadata: result.metadata,
         fileId: fileId,
-        documentKey: documentKey
+        documentKey: documentKey,
       }
-
     } catch (error) {
       console.error(`❌ Error transcribing ${path.basename(filePath)}:`, error.message)
-      
+
       // Check if this is a retryable error using service-specific logic
       const isRetryableError = await this.transcriptionService.isRetryableError(error)
-      
+
       // Mark as failed in database if file ID provided
       if (fileId) {
         await this.db('document_files')
@@ -83,9 +84,9 @@ class UnifiedTranscriptionManager {
               error: error.message,
               failed_at: new Date().toISOString(),
               service: this.serviceName,
-              retryable: isRetryableError
+              retryable: isRetryableError,
             }),
-            updated_at: new Date()
+            updated_at: new Date(),
           })
       }
 
@@ -95,16 +96,18 @@ class UnifiedTranscriptionManager {
         service: this.serviceName,
         retryable: isRetryableError,
         fileId: fileId,
-        documentKey: documentKey
+        documentKey: documentKey,
       }
     }
   }
 
   // Batch transcribe multiple files
   async transcribeBatch(files, batchSize = 5) {
-    console.log(`🚀 Starting batch transcription of ${files.length} files (using ${this.serviceName})`)
+    console.log(
+      `🚀 Starting batch transcription of ${files.length} files (using ${this.serviceName})`,
+    )
     console.log(`📦 Processing in batches of ${batchSize} files`)
-    
+
     let processed = 0
     let successful = 0
     let failed = 0
@@ -113,16 +116,14 @@ class UnifiedTranscriptionManager {
     // Process files in batches to avoid rate limiting
     for (let i = 0; i < files.length; i += batchSize) {
       const batch = files.slice(i, i + batchSize)
-      console.log(`\n📋 Processing batch ${Math.floor(i/batchSize) + 1}/${Math.ceil(files.length/batchSize)} (${batch.length} files)`)
+      console.log(
+        `\n📋 Processing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(files.length / batchSize)} (${batch.length} files)`,
+      )
 
       // Process batch with delay between files
       for (const file of batch) {
-        const result = await this.transcribeFile(
-          file.file_path, 
-          file.id, 
-          file.document_key
-        )
-        
+        const result = await this.transcribeFile(file.file_path, file.id, file.document_key)
+
         results.push(result)
         processed++
 
@@ -132,30 +133,34 @@ class UnifiedTranscriptionManager {
           failed++
         }
 
-        console.log(`📊 Progress: ${processed}/${files.length} (${successful} success, ${failed} failed)`)
-        
+        console.log(
+          `📊 Progress: ${processed}/${files.length} (${successful} success, ${failed} failed)`,
+        )
+
         // Small delay to avoid hitting rate limits
         if (processed < files.length) {
-          await new Promise(resolve => setTimeout(resolve, 2000)) // 2 second delay
+          await new Promise((resolve) => setTimeout(resolve, 2000)) // 2 second delay
         }
       }
 
       // Longer delay between batches
       if (i + batchSize < files.length) {
         console.log('⏳ Waiting 8 seconds before next batch...')
-        await new Promise(resolve => setTimeout(resolve, 8000)) // 8 second delay
+        await new Promise((resolve) => setTimeout(resolve, 8000)) // 8 second delay
       }
     }
 
     console.log(`\n🎉 Batch transcription complete!`)
-    console.log(`📊 Final results: ${successful} successful, ${failed} failed out of ${processed} total`)
+    console.log(
+      `📊 Final results: ${successful} successful, ${failed} failed out of ${processed} total`,
+    )
 
     return {
       processed,
       successful,
       failed,
       service: this.serviceName,
-      results
+      results,
     }
   }
 
@@ -164,13 +169,13 @@ class UnifiedTranscriptionManager {
     let query = this.db('document_files as df')
       .join('documents as d', 'df.document_id', 'd.id')
       .select(
-        'df.id', 
-        'df.file_path', 
-        'df.part_number', 
-        'd.document_key', 
-        'd.type', 
+        'df.id',
+        'df.file_path',
+        'df.part_number',
+        'd.document_key',
+        'd.type',
         'd.date',
-        'df.transcription_status'
+        'df.transcription_status',
       )
       .where('df.transcription_status', 'pending')
 
@@ -191,15 +196,15 @@ class UnifiedTranscriptionManager {
       .groupBy('transcription_status')
 
     const total = await this.db('document_files').count('* as count').first()
-    
+
     const result = {
       total: total.count,
       pending: 0,
       completed: 0,
-      failed: 0
+      failed: 0,
     }
 
-    stats.forEach(stat => {
+    stats.forEach((stat) => {
       result[stat.transcription_status] = parseInt(stat.count)
     })
 
@@ -210,17 +215,18 @@ class UnifiedTranscriptionManager {
   async transcribeFolder(folderPath, filePattern = '*.pdf') {
     try {
       console.log(`📁 Scanning folder: ${folderPath}`)
-      
+
       if (!fs.existsSync(folderPath)) {
         throw new Error(`Folder not found: ${folderPath}`)
       }
 
       // Get all PDF files in folder
-      const files = fs.readdirSync(folderPath)
-        .filter(file => file.toLowerCase().endsWith('.pdf'))
-        .map(file => ({
+      const files = fs
+        .readdirSync(folderPath)
+        .filter((file) => file.toLowerCase().endsWith('.pdf'))
+        .map((file) => ({
           name: file,
-          path: path.join(folderPath, file)
+          path: path.join(folderPath, file),
         }))
 
       if (files.length === 0) {
@@ -237,23 +243,23 @@ class UnifiedTranscriptionManager {
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
         console.log(`\n📄 Processing ${i + 1}/${files.length}: ${file.name}`)
-        
+
         const result = await this.transcribeFile(file.path, null, file.name)
         results.push({
           ...result,
           fileName: file.name,
-          filePath: file.path
+          filePath: file.path,
         })
 
         if (result.success) {
           successful++
-          
+
           // Save transcription to text file
           const outputDir = path.join(folderPath, 'transcriptions')
           if (!fs.existsSync(outputDir)) {
             fs.mkdirSync(outputDir, { recursive: true })
           }
-          
+
           const outputFile = path.join(outputDir, file.name.replace('.pdf', '.txt'))
           fs.writeFileSync(outputFile, result.transcription)
           console.log(`💾 Saved transcription: ${outputFile}`)
@@ -263,21 +269,22 @@ class UnifiedTranscriptionManager {
 
         // Rate limiting delay
         if (i < files.length - 1) {
-          await new Promise(resolve => setTimeout(resolve, 2000)) // 2 second delay
+          await new Promise((resolve) => setTimeout(resolve, 2000)) // 2 second delay
         }
       }
 
       console.log(`\n🎉 Folder transcription complete!`)
-      console.log(`📊 Results: ${successful} successful, ${failed} failed out of ${files.length} total`)
+      console.log(
+        `📊 Results: ${successful} successful, ${failed} failed out of ${files.length} total`,
+      )
 
       return {
         processed: files.length,
         successful,
         failed,
         service: this.serviceName,
-        results
+        results,
       }
-
     } catch (error) {
       console.error('❌ Error transcribing folder:', error.message)
       throw error
@@ -310,7 +317,7 @@ async function main() {
     switch (command) {
       case 'services':
         console.log('Available transcription services:')
-        getAvailableServices().forEach(service => {
+        getAvailableServices().forEach((service) => {
           console.log(`  ${service}${service === serviceName ? ' (current)' : ''}`)
         })
         break
@@ -326,7 +333,9 @@ async function main() {
 
       case 'transcribe-file':
         if (!arg1) {
-          console.log('Usage: node unified-transcriber.js transcribe-file <file_path> [--service <service_name>]')
+          console.log(
+            'Usage: node unified-transcriber.js transcribe-file <file_path> [--service <service_name>]',
+          )
           break
         }
         const result = await manager.transcribeFile(arg1)
@@ -338,7 +347,9 @@ async function main() {
 
       case 'transcribe-folder':
         if (!arg1) {
-          console.log('Usage: node unified-transcriber.js transcribe-folder <folder_path> [--service <service_name>]')
+          console.log(
+            'Usage: node unified-transcriber.js transcribe-folder <folder_path> [--service <service_name>]',
+          )
           break
         }
         await manager.transcribeFolder(arg1)
@@ -347,10 +358,10 @@ async function main() {
       case 'transcribe-batch':
         const batchSize = arg1 ? parseInt(arg1) : 10
         const typeFilter = arg2 || 'wartime_letters'
-        
+
         console.log(`Getting ${batchSize} pending ${typeFilter} files...`)
         const files = await manager.getPendingFiles(batchSize, typeFilter)
-        
+
         if (files.length === 0) {
           console.log('No pending files found')
           break
@@ -373,18 +384,27 @@ async function main() {
         console.log('Usage:')
         console.log('  node unified-transcriber.js services')
         console.log('  node unified-transcriber.js stats [--service <service_name>]')
-        console.log('  node unified-transcriber.js transcribe-file <file_path> [--service <service_name>]')
-        console.log('  node unified-transcriber.js transcribe-folder <folder_path> [--service <service_name>]')
-        console.log('  node unified-transcriber.js transcribe-batch [batch_size] [type_filter] [--service <service_name>]')
+        console.log(
+          '  node unified-transcriber.js transcribe-file <file_path> [--service <service_name>]',
+        )
+        console.log(
+          '  node unified-transcriber.js transcribe-folder <folder_path> [--service <service_name>]',
+        )
+        console.log(
+          '  node unified-transcriber.js transcribe-batch [batch_size] [type_filter] [--service <service_name>]',
+        )
         console.log('')
         console.log('Available services:', getAvailableServices().join(', '))
         console.log('Default service: gemini')
         console.log('')
         console.log('Examples:')
-        console.log('  node unified-transcriber.js transcribe-folder ./poep-wartime --service openai')
-        console.log('  node unified-transcriber.js transcribe-batch 10 wartime_letters --service gemini')
+        console.log(
+          '  node unified-transcriber.js transcribe-folder ./poep-wartime --service openai',
+        )
+        console.log(
+          '  node unified-transcriber.js transcribe-batch 10 wartime_letters --service gemini',
+        )
     }
-
   } catch (error) {
     console.error('Error:', error.message)
   } finally {

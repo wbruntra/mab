@@ -9,7 +9,9 @@
     "list": "bun transcription-manager.js list",
     "transcribe": "bun transcription-manager.js transcribe",
     "server": "bun api-server.js",
-    "dev": "bun --watch api-server.js"
+    "dev": "bun --watch api-server.js",
+    "fmt": "bun fmt",
+    "fmt:check": "bun fmt --check"
   },
   "keywords": [],
   "author": "",

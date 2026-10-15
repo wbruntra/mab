@@ -5,16 +5,19 @@ This document outlines the changes needed to implement scale-to-zero for the mab
 ## Changes Made
 
 ### 1. Application (api-server.js) ✅
+
 - Added idle tracking middleware that records the time of each request
 - Added in-flight request counter to prevent shutdown during active requests
 - Added idle watchdog that exits cleanly after 30 minutes of inactivity with no in-flight requests
 
 ### 2. PM2 Configuration (ecosystem.config.js) ✅
+
 - Added `"stop_exit_codes": [0]` to mab-api-server config
 - This prevents PM2 from auto-restarting when the app exits cleanly
 - PM2 will mark the app as "stopped" rather than immediately restarting it
 
 ### 3. PM2 Wrapper Script (start-pm2-app.sh) ✅
+
 - Created generic wrapper script for nginx to start any PM2 process on-demand
 - Takes app name as command-line argument
 - Script must be copied to system location and made executable
@@ -22,6 +25,7 @@ This document outlines the changes needed to implement scale-to-zero for the mab
 ## Installation Steps
 
 ### Step 1: Copy the PM2 Wrapper Script
+
 ```bash
 sudo cp /home/william/workspace/mab/start-pm2-app.sh /usr/local/bin/start-pm2-app.sh
 sudo chmod +x /usr/local/bin/start-pm2-app.sh
@@ -34,6 +38,7 @@ sudo visudo
 ```
 
 Add this line:
+
 ```
 www-data ALL=(william) NOPASSWD: /usr/local/bin/start-pm2-app.sh
 ```
@@ -41,6 +46,7 @@ www-data ALL=(william) NOPASSWD: /usr/local/bin/start-pm2-app.sh
 This allows nginx (running as www-data) to execute the script as your user without a password prompt.
 
 ### Step 2: Update PM2 Configuration
+
 ```bash
 cd /home/william/workspace/mab
 pm2 delete mab-api-server  # If already running
@@ -53,6 +59,7 @@ pm2 save
 The nginx configuration has been updated in [system/nginx-sites.conf](system/nginx-sites.conf).
 
 Key changes:
+
 - Added connection timeouts to the `/api` location
 - Added `error_page 502 503 504 = @start_mab` to catch downstream failures
 - Created `@start_mab` location that executes the startup script and retries
@@ -69,6 +76,7 @@ sudo apt-get install libnginx-mod-http-lua
 Alternatively, if you don't want to use Lua, consider these approaches:
 
 #### Alternative A: Systemd Socket Activation (Recommended)
+
 Create a systemd socket that activates the service on connection:
 
 ```bash
@@ -101,12 +109,15 @@ WantedBy=multi-user.target
 ```
 
 #### Alternative B: Health Check Service
+
 Create a small always-on service (minimal memory) that:
+
 1. Listens on a different port (e.g., 8405)
 2. When pinged, starts PM2 process
 3. Proxies request to main app
 
 #### Alternative C: Monitoring Script (Simple, no nginx changes needed)
+
 Simple approach - run a lightweight monitor:
 
 ```bash
@@ -115,6 +126,7 @@ curl -f http://localhost:8404/api/auth/status || /usr/local/bin/start-pm2-app.sh
 ```
 
 ### Step 4: Copy nginx config and restart
+
 ```bash
 sudo cp /home/william/workspace/mab/system/nginx-sites.conf /etc/nginx/sites-available/maryalice.bruntrager.win
 sudo systemctl restart nginx
@@ -123,23 +135,27 @@ sudo systemctl restart nginx
 ### Step 5: Test the Setup
 
 1. Start the service normally:
+
    ```bash
    pm2 start mab-api-server
    ```
 
 2. Check that it's running:
+
    ```bash
    pm2 status
    curl http://localhost:8404/api/auth/status
    ```
 
 3. Wait 30+ minutes with no requests, it should exit cleanly:
+
    ```bash
    pm2 logs mab-api-server --lines 50
    # Should show: "Idle for XXXs with no in-flight requests, exiting cleanly"
    ```
 
 4. Verify PM2 shows it as stopped (not restarting):
+
    ```bash
    pm2 status
    # Should show status as "stopped"
@@ -181,14 +197,17 @@ tail -f /home/william/personal/mab/logs/api-server-out.log
 ## Troubleshooting
 
 **App keeps restarting immediately:**
+
 - Check that `"stop_exit_codes": [0]` is in ecosystem.config.js
 - Verify with: `pm2 show mab-api-server`
 
 **App exits too quickly:**
+
 - Increase `IDLE_TIMEOUT_MS` in api-server.js
 - Check that requests are being tracked: look for in-flight counter in logs
 
 **App never exits:**
+
 - Check that there are no long-running connections keeping in-flight > 0
 - Verify the interval is running (check logs for idle messages before exit)
 

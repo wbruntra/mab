@@ -12,28 +12,28 @@ import {
 import type { PaginationState } from '@tanstack/react-table'
 
 interface Document {
-  id: number;
-  document_key: string;
-  date: string;
-  type: string;
-  year: number;
-  transcription_status: string;
-  file_count: number;
-  completed_count: number;
-  pending_count: number;
-  summary?: string;
+  id: number
+  document_key: string
+  date: string
+  type: string
+  year: number
+  transcription_status: string
+  file_count: number
+  completed_count: number
+  pending_count: number
+  summary?: string
 }
 
 interface DocumentsTableProps {
-  documents: Document[];
-  totalDocuments: number;
-  currentPage: number;
-  pageSize: number;
-  onPageChange: (page: number) => void;
-  onRowClick: (document: Document) => void;
-  loading?: boolean;
-  sorting: SortingState;
-  onSortingChange: (sorting: SortingState) => void;
+  documents: Document[]
+  totalDocuments: number
+  currentPage: number
+  pageSize: number
+  onPageChange: (page: number) => void
+  onRowClick: (document: Document) => void
+  loading?: boolean
+  sorting: SortingState
+  onSortingChange: (sorting: SortingState) => void
 }
 
 const columnHelper = createColumnHelper<Document>()
@@ -47,101 +47,97 @@ export const DocumentsTable = ({
   onRowClick,
   loading = false,
   sorting,
-  onSortingChange
+  onSortingChange,
 }: DocumentsTableProps) => {
-  
-  const columns = useMemo(() => [
-    columnHelper.accessor('document_key', {
-      header: 'Document',
-      cell: (info) => (
-        <strong className="text-primary">{info.getValue()}</strong>
-      ),
-      size: 200,
-      minSize: 150,
-    }),
-    columnHelper.accessor('date', {
-      header: 'Date',
-      cell: (info) => (
-        <small className="text-muted">{info.getValue()}</small>
-      ),
-      size: 100,
-      minSize: 90,
-    }),
-    columnHelper.accessor('type', {
-      header: 'Type',
-      cell: (info) => (
-        <span className="badge bg-secondary">
-          {info.getValue().replace('_', ' ')}
-        </span>
-      ),
-      size: 120,
-      minSize: 100,
-    }),
-    columnHelper.accessor('summary', {
-      header: 'Summary',
-      cell: (info) => {
-        const summary = info.getValue();
-        return summary ? (
-          <span 
-            className="text-muted summary-text"
-            title={summary}
-            style={{ 
-              display: 'block',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              fontSize: '0.9rem',
-              cursor: 'help'
-            }}
-          >
-            {summary.length > 120 ? 
-              `${summary.substring(0, 120)}...` : 
-              summary
-            }
-          </span>
-        ) : (
-          <span className="text-muted fst-italic" style={{ fontSize: '0.85rem' }}>
-            No summary available
-          </span>
-        );
-      },
-      size: 300,
-      minSize: 200,
-      enableSorting: false,
-    }),
-    // columnHelper.accessor('transcription_status', {
-    //   header: 'Status',
-    //   cell: (info) => (
-    //     <span className={`badge ${
-    //       info.getValue() === 'completed' ? 'bg-success' :
-    //       info.getValue() === 'partial' ? 'bg-warning' : 'bg-danger'
-    //     }`}>
-    //       {info.getValue()}
-    //     </span>
-    //   ),
-    //   size: 110,
-    //   minSize: 100,
-    // }),
-    columnHelper.display({
-      id: 'files',
-      header: 'Files',
-      cell: (info) => {
-        const row = info.row.original;
-        return (
-          <span className="text-muted">
-            <strong>{row.completed_count}</strong>/{row.file_count}
-          </span>
-        );
-      },
-      size: 80,
-      minSize: 70,
-    }),
-  ], [])
+  const columns = useMemo(
+    () => [
+      columnHelper.accessor('document_key', {
+        header: 'Document',
+        cell: (info) => <strong className="text-primary">{info.getValue()}</strong>,
+        size: 200,
+        minSize: 150,
+      }),
+      columnHelper.accessor('date', {
+        header: 'Date',
+        cell: (info) => <small className="text-muted">{info.getValue()}</small>,
+        size: 100,
+        minSize: 90,
+      }),
+      columnHelper.accessor('type', {
+        header: 'Type',
+        cell: (info) => (
+          <span className="badge bg-secondary">{info.getValue().replace('_', ' ')}</span>
+        ),
+        size: 120,
+        minSize: 100,
+      }),
+      columnHelper.accessor('summary', {
+        header: 'Summary',
+        cell: (info) => {
+          const summary = info.getValue()
+          return summary ? (
+            <span
+              className="text-muted summary-text"
+              title={summary}
+              style={{
+                display: 'block',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                fontSize: '0.9rem',
+                cursor: 'help',
+              }}
+            >
+              {summary.length > 120 ? `${summary.substring(0, 120)}...` : summary}
+            </span>
+          ) : (
+            <span className="text-muted fst-italic" style={{ fontSize: '0.85rem' }}>
+              No summary available
+            </span>
+          )
+        },
+        size: 300,
+        minSize: 200,
+        enableSorting: false,
+      }),
+      // columnHelper.accessor('transcription_status', {
+      //   header: 'Status',
+      //   cell: (info) => (
+      //     <span className={`badge ${
+      //       info.getValue() === 'completed' ? 'bg-success' :
+      //       info.getValue() === 'partial' ? 'bg-warning' : 'bg-danger'
+      //     }`}>
+      //       {info.getValue()}
+      //     </span>
+      //   ),
+      //   size: 110,
+      //   minSize: 100,
+      // }),
+      columnHelper.display({
+        id: 'files',
+        header: 'Files',
+        cell: (info) => {
+          const row = info.row.original
+          return (
+            <span className="text-muted">
+              <strong>{row.completed_count}</strong>/{row.file_count}
+            </span>
+          )
+        },
+        size: 80,
+        minSize: 70,
+      }),
+    ],
+    [],
+  )
 
-  const pagination = useMemo<PaginationState>(() => ({
-    pageIndex: currentPage - 1,
-    pageSize: pageSize,
-  }), [currentPage, pageSize])
+  const pagination = useMemo<PaginationState>(
+    () => ({
+      pageIndex: currentPage - 1,
+      pageSize: pageSize,
+    }),
+    [currentPage, pageSize],
+  )
 
   const table = useReactTable({
     data: documents,
@@ -185,15 +181,15 @@ export const DocumentsTable = ({
         <div className="table-responsive">
           <table className="table table-hover mb-0">
             <thead className="table-light">
-              {table.getHeaderGroups().map(headerGroup => (
+              {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                    <th 
+                  {headerGroup.headers.map((header) => (
+                    <th
                       key={header.id}
-                      style={{ 
+                      style={{
                         width: header.getSize(),
                         minWidth: header.column.columnDef.minSize,
-                        cursor: header.column.getCanSort() ? 'pointer' : 'default'
+                        cursor: header.column.getCanSort() ? 'pointer' : 'default',
                       }}
                       onClick={header.column.getToggleSortingHandler()}
                     >
@@ -217,15 +213,15 @@ export const DocumentsTable = ({
               ))}
             </thead>
             <tbody>
-              {table.getRowModel().rows.map(row => (
-                <tr 
+              {table.getRowModel().rows.map((row) => (
+                <tr
                   key={row.id}
                   className="cursor-pointer"
                   onClick={() => onRowClick(row.original)}
                   style={{ cursor: 'pointer' }}
                 >
-                  {row.getVisibleCells().map(cell => (
-                    <td 
+                  {row.getVisibleCells().map((cell) => (
+                    <td
                       key={cell.id}
                       style={{
                         width: cell.column.getSize(),
@@ -233,7 +229,7 @@ export const DocumentsTable = ({
                         maxWidth: cell.column.getSize(),
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
+                        whiteSpace: 'nowrap',
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -245,20 +241,21 @@ export const DocumentsTable = ({
           </table>
         </div>
       </div>
-      
+
       {/* Enhanced Pagination Footer */}
       {totalPages > 1 && (
         <div className="card-footer">
           <div className="d-flex justify-content-between align-items-center">
             <div className="text-muted">
-              Showing {((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, totalDocuments)} of {totalDocuments} documents
+              Showing {(currentPage - 1) * pageSize + 1}-
+              {Math.min(currentPage * pageSize, totalDocuments)} of {totalDocuments} documents
             </div>
-            
+
             <div className="d-flex align-items-center gap-3">
               {/* Page size selector */}
               <div className="d-flex align-items-center gap-2">
                 <span className="text-muted small">Show:</span>
-                <select 
+                <select
                   className="form-select form-select-sm"
                   style={{ width: 'auto' }}
                   value={pageSize}
@@ -277,8 +274,8 @@ export const DocumentsTable = ({
               <nav aria-label="Documents pagination">
                 <ul className="pagination pagination-sm mb-0">
                   <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                    <button 
-                      className="page-link" 
+                    <button
+                      className="page-link"
                       onClick={() => onPageChange(1)}
                       disabled={currentPage === 1}
                       title="First page"
@@ -287,8 +284,8 @@ export const DocumentsTable = ({
                     </button>
                   </li>
                   <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                    <button 
-                      className="page-link" 
+                    <button
+                      className="page-link"
                       onClick={() => onPageChange(currentPage - 1)}
                       disabled={currentPage === 1}
                       title="Previous page"
@@ -296,35 +293,35 @@ export const DocumentsTable = ({
                       <i className="bi bi-chevron-left"></i>
                     </button>
                   </li>
-                  
+
                   {/* Page numbers */}
                   {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
-                    let pageNum;
+                    let pageNum
                     if (totalPages <= 5) {
-                      pageNum = index + 1;
+                      pageNum = index + 1
                     } else if (currentPage <= 3) {
-                      pageNum = index + 1;
+                      pageNum = index + 1
                     } else if (currentPage >= totalPages - 2) {
-                      pageNum = totalPages - 4 + index;
+                      pageNum = totalPages - 4 + index
                     } else {
-                      pageNum = currentPage - 2 + index;
+                      pageNum = currentPage - 2 + index
                     }
-                    
+
                     return (
-                      <li key={pageNum} className={`page-item ${currentPage === pageNum ? 'active' : ''}`}>
-                        <button 
-                          className="page-link" 
-                          onClick={() => onPageChange(pageNum)}
-                        >
+                      <li
+                        key={pageNum}
+                        className={`page-item ${currentPage === pageNum ? 'active' : ''}`}
+                      >
+                        <button className="page-link" onClick={() => onPageChange(pageNum)}>
                           {pageNum}
                         </button>
                       </li>
-                    );
+                    )
                   })}
-                  
+
                   <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                    <button 
-                      className="page-link" 
+                    <button
+                      className="page-link"
                       onClick={() => onPageChange(currentPage + 1)}
                       disabled={currentPage === totalPages}
                       title="Next page"
@@ -333,8 +330,8 @@ export const DocumentsTable = ({
                     </button>
                   </li>
                   <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                    <button 
-                      className="page-link" 
+                    <button
+                      className="page-link"
                       onClick={() => onPageChange(totalPages)}
                       disabled={currentPage === totalPages}
                       title="Last page"
@@ -348,7 +345,7 @@ export const DocumentsTable = ({
           </div>
         </div>
       )}
-      
+
       {documents.length === 0 && !loading && (
         <div className="card-body">
           <div className="text-center py-5">

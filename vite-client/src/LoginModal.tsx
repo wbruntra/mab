@@ -17,11 +17,11 @@ export const LoginModal = ({ show }: LoginModalProps) => {
     setError('')
 
     const success = await login(password)
-    
+
     if (!success) {
       setError('Invalid password')
     }
-    
+
     setLoading(false)
   }
 
@@ -37,7 +37,9 @@ export const LoginModal = ({ show }: LoginModalProps) => {
           <div className="modal-body">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
                 <input
                   type="password"
                   className={`form-control ${error ? 'is-invalid' : ''}`}
@@ -47,21 +49,17 @@ export const LoginModal = ({ show }: LoginModalProps) => {
                   autoFocus
                   required
                 />
-                {error && (
-                  <div className="invalid-feedback">
-                    {error}
-                  </div>
-                )}
+                {error && <div className="invalid-feedback">{error}</div>}
               </div>
               <div className="d-grid">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={loading}
-                >
+                <button type="submit" className="btn btn-primary" disabled={loading}>
                   {loading ? (
                     <>
-                      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
                       Signing In...
                     </>
                   ) : (

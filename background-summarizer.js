@@ -17,7 +17,7 @@ class BackgroundSummarizer {
       totalFailed: 0,
       totalSkipped: 0,
       sessionStarted: new Date(),
-      lastBatchTime: null
+      lastBatchTime: null,
     }
   }
 
@@ -25,7 +25,7 @@ class BackgroundSummarizer {
     const timestamp = new Date().toISOString()
     const logMessage = `[${timestamp}] ${message}`
     console.log(logMessage)
-    
+
     // Append to log file
     fs.appendFileSync(this.logFile, logMessage + '\n')
   }
@@ -63,9 +63,9 @@ class BackgroundSummarizer {
   async processBatch() {
     try {
       this.log(`🔍 Looking for ${this.batchSize} documents ready for summarization...`)
-      
+
       const documents = await this.summarizer.getDocumentsReadyForSummary(this.batchSize, false)
-      
+
       if (documents.length === 0) {
         this.log(`✅ No more documents ready for summarization. All summaries complete!`)
         return { completed: true, processed: 0 }
@@ -81,10 +81,12 @@ class BackgroundSummarizer {
 
       for (let i = 0; i < documents.length; i++) {
         const doc = documents[i]
-        
+
         try {
-          this.log(`📄 Processing ${i + 1}/${documents.length}: ${doc.document_key} (${doc.completed_files}/${doc.total_files} files)`)
-          
+          this.log(
+            `📄 Processing ${i + 1}/${documents.length}: ${doc.document_key} (${doc.completed_files}/${doc.total_files} files)`,
+          )
+
           const result = await this.summarizer.generateSummary(doc.id)
 
           if (result.success) {
@@ -103,7 +105,6 @@ class BackgroundSummarizer {
             this.stats.totalFailed++
             this.log(`❌ Failed: ${result.error}`)
           }
-
         } catch (error) {
           batchFailed++
           this.stats.totalFailed++
@@ -114,25 +115,28 @@ class BackgroundSummarizer {
 
         // Progress update
         const totalProgress = this.stats.totalProcessed
-        this.log(`📊 Session progress: ${totalProgress} total (${this.stats.totalSuccessful} success, ${this.stats.totalFailed} failed, ${this.stats.totalSkipped} skipped)`)
+        this.log(
+          `📊 Session progress: ${totalProgress} total (${this.stats.totalSuccessful} success, ${this.stats.totalFailed} failed, ${this.stats.totalSkipped} skipped)`,
+        )
 
         // Delay between summaries (except for the last one)
         if (i < documents.length - 1) {
           this.log(`⏳ Waiting ${this.delayBetweenSummaries / 1000}s before next summary...`)
-          await new Promise(resolve => setTimeout(resolve, this.delayBetweenSummaries))
+          await new Promise((resolve) => setTimeout(resolve, this.delayBetweenSummaries))
         }
       }
 
-      this.log(`🎯 Batch complete: ${batchSuccessful} successful, ${batchFailed} failed, ${batchSkipped} skipped`)
-      
-      return { 
-        completed: false, 
+      this.log(
+        `🎯 Batch complete: ${batchSuccessful} successful, ${batchFailed} failed, ${batchSkipped} skipped`,
+      )
+
+      return {
+        completed: false,
         processed: documents.length,
         successful: batchSuccessful,
         failed: batchFailed,
-        skipped: batchSkipped
+        skipped: batchSkipped,
       }
-
     } catch (error) {
       this.log(`❌ Error processing batch: ${error.message}`)
       return { completed: false, processed: 0, error: error.message }
@@ -153,7 +157,7 @@ class BackgroundSummarizer {
       await this.getInitialStats()
 
       let batchCount = 0
-      
+
       while (this.isRunning) {
         batchCount++
         this.log(`\n🚀 Starting batch #${batchCount}`)
@@ -174,16 +178,17 @@ class BackgroundSummarizer {
         // Get updated stats
         const currentStats = await this.summarizer.getStats()
         if (currentStats) {
-          this.log(`📈 Current statistics: ${currentStats.documents_with_summary} with summaries, ${currentStats.documents_ready_for_summary} ready for summary`)
+          this.log(
+            `📈 Current statistics: ${currentStats.documents_with_summary} with summaries, ${currentStats.documents_ready_for_summary} ready for summary`,
+          )
         }
 
         // Wait before next batch
         if (this.isRunning) {
           this.log(`⏳ Waiting ${this.delayBetweenBatches / 1000}s before next batch...`)
-          await new Promise(resolve => setTimeout(resolve, this.delayBetweenBatches))
+          await new Promise((resolve) => setTimeout(resolve, this.delayBetweenBatches))
         }
       }
-
     } catch (error) {
       this.log(`💥 Fatal error in background summarizer: ${error.message}`)
     } finally {
@@ -200,7 +205,7 @@ class BackgroundSummarizer {
   async cleanup() {
     try {
       this.log(`🧹 Cleaning up background summarizer...`)
-      
+
       // Log final statistics
       const sessionDuration = (new Date() - this.stats.sessionStarted) / 1000
       this.log(`📊 Session summary:`)
@@ -209,7 +214,9 @@ class BackgroundSummarizer {
       this.log(`   Total successful: ${this.stats.totalSuccessful}`)
       this.log(`   Total failed: ${this.stats.totalFailed}`)
       this.log(`   Total skipped: ${this.stats.totalSkipped}`)
-      this.log(`   Success rate: ${this.stats.totalProcessed > 0 ? Math.round((this.stats.totalSuccessful / this.stats.totalProcessed) * 100) : 0}%`)
+      this.log(
+        `   Success rate: ${this.stats.totalProcessed > 0 ? Math.round((this.stats.totalSuccessful / this.stats.totalProcessed) * 100) : 0}%`,
+      )
 
       await this.summarizer.close()
       this.log(`✅ Background summarizer stopped cleanly`)
@@ -243,15 +250,14 @@ class BackgroundSummarizer {
 // Main execution
 async function main() {
   const summarizer = new BackgroundSummarizer()
-  
+
   try {
     // Setup signal handlers for graceful shutdown
     summarizer.setupSignalHandlers()
-    
+
     // Initialize and run
     await summarizer.init()
     await summarizer.run()
-    
   } catch (error) {
     console.error('Failed to start background summarizer:', error.message)
     process.exit(1)

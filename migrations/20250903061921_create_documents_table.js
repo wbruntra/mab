@@ -2,8 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.up = function(knex) {
-  return knex.schema.createTable('documents', function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable('documents', function (table) {
     table.increments('id').primary()
     table.string('document_key').unique().notNullable()
     table.string('date').notNullable()
@@ -15,7 +15,7 @@ exports.up = function(knex) {
     table.string('transcription_status').defaultTo('pending')
     table.text('metadata').nullable() // JSON metadata
     table.timestamps(true, true) // created_at, updated_at
-    
+
     // Indexes
     table.index(['year'])
     table.index(['type'])
@@ -28,6 +28,6 @@ exports.up = function(knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTableIfExists('documents')
 }

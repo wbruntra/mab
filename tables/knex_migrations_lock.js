@@ -11,7 +11,6 @@ CREATE TABLE knex_migrations_lock (
 const { Model } = require('objection')
 const knex = require('../db')
 
-
 // Initialize knex connection for all models
 if (!Model.knex()) {
   Model.knex(knex)
@@ -21,7 +20,6 @@ class KnexMigrationsLock extends Model {
   static get tableName() {
     return 'knex_migrations_lock'
   }
-  
 
   // TODO: Add jsonSchema based on DDL above
   // TODO: Add relationMappings if needed

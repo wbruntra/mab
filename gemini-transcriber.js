@@ -1,4 +1,4 @@
-const { GoogleGenAI } = require("@google/genai")
+const { GoogleGenAI } = require('@google/genai')
 const fs = require('fs')
 const path = require('path')
 const secrets = require('./secrets.js')
@@ -26,7 +26,7 @@ class GeminiTranscriptionManager {
   async transcribeFile(filePath, fileId = null, documentKey = null) {
     try {
       console.log(`📄 Transcribing: ${path.basename(filePath)}`)
-      
+
       // Check if file exists
       if (!fs.existsSync(filePath)) {
         throw new Error(`File not found: ${filePath}`)
@@ -38,7 +38,7 @@ class GeminiTranscriptionManager {
 
       // Prepare content for Gemini
       const contents = [
-        { 
+        {
           text: `Please transcribe all the text content from this wartime letter/document page. 
 
 INSTRUCTIONS:
@@ -48,20 +48,20 @@ INSTRUCTIONS:
 - Return only the transcribed text without any additional commentary or formatting markers
 - If the page appears to be blank or contains no readable text, respond with "[blank page]"
 
-Please provide the transcription as plain text.`
+Please provide the transcription as plain text.`,
         },
         {
           inlineData: {
             mimeType: 'application/pdf',
-            data: base64Data
-          }
-        }
+            data: base64Data,
+          },
+        },
       ]
 
       // Generate transcription
       const response = await this.ai.models.generateContent({
-        model: "gemini-3-flash",
-        contents: contents
+        model: 'gemini-3-flash',
+        contents: contents,
       })
 
       const transcription = response.text.trim()
@@ -73,7 +73,7 @@ Please provide the transcription as plain text.`
           service: 'gemini',
           model: 'gemini-2.5-flash',
           transcribed_at: new Date().toISOString(),
-          characters: transcription.length
+          characters: transcription.length,
         }
 
         await this.db('document_files')
@@ -82,7 +82,7 @@ Please provide the transcription as plain text.`
             transcription: transcription,
             transcription_status: 'completed',
             transcription_metadata: JSON.stringify(metadata),
-            updated_at: new Date()
+            updated_at: new Date(),
           })
 
         console.log(`💾 Updated database for file ID ${fileId}`)
@@ -93,20 +93,19 @@ Please provide the transcription as plain text.`
         transcription: transcription,
         characters: transcription.length,
         fileId: fileId,
-        documentKey: documentKey
+        documentKey: documentKey,
       }
-
     } catch (error) {
       console.error(`❌ Error transcribing ${path.basename(filePath)}:`, error.message)
-      
+
       // Check if this is a retryable error (rate limit/quota)
-      const isRetryableError = error.message && (
-        error.message.includes('RESOURCE_EXHAUSTED') ||
-        error.message.includes('429') ||
-        error.message.includes('quota') ||
-        error.message.includes('rate limit')
-      )
-      
+      const isRetryableError =
+        error.message &&
+        (error.message.includes('RESOURCE_EXHAUSTED') ||
+          error.message.includes('429') ||
+          error.message.includes('quota') ||
+          error.message.includes('rate limit'))
+
       // Mark as failed in database if file ID provided
       if (fileId) {
         await this.db('document_files')
@@ -117,9 +116,9 @@ Please provide the transcription as plain text.`
               error: error.message,
               failed_at: new Date().toISOString(),
               service: 'gemini',
-              retryable: isRetryableError
+              retryable: isRetryableError,
             }),
-            updated_at: new Date()
+            updated_at: new Date(),
           })
       }
 
@@ -127,7 +126,7 @@ Please provide the transcription as plain text.`
         success: false,
         error: error.message,
         fileId: fileId,
-        documentKey: documentKey
+        documentKey: documentKey,
       }
     }
   }
@@ -136,7 +135,7 @@ Please provide the transcription as plain text.`
   async transcribeBatch(files, batchSize = 5) {
     console.log(`🚀 Starting batch transcription of ${files.length} files`)
     console.log(`📦 Processing in batches of ${batchSize} files`)
-    
+
     let processed = 0
     let successful = 0
     let failed = 0
@@ -145,16 +144,14 @@ Please provide the transcription as plain text.`
     // Process files in batches to avoid rate limiting
     for (let i = 0; i < files.length; i += batchSize) {
       const batch = files.slice(i, i + batchSize)
-      console.log(`\n📋 Processing batch ${Math.floor(i/batchSize) + 1}/${Math.ceil(files.length/batchSize)} (${batch.length} files)`)
+      console.log(
+        `\n📋 Processing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(files.length / batchSize)} (${batch.length} files)`,
+      )
 
       // Process batch with delay between files
       for (const file of batch) {
-        const result = await this.transcribeFile(
-          file.file_path, 
-          file.id, 
-          file.document_key
-        )
-        
+        const result = await this.transcribeFile(file.file_path, file.id, file.document_key)
+
         results.push(result)
         processed++
 
@@ -164,29 +161,33 @@ Please provide the transcription as plain text.`
           failed++
         }
 
-        console.log(`📊 Progress: ${processed}/${files.length} (${successful} success, ${failed} failed)`)
-        
+        console.log(
+          `📊 Progress: ${processed}/${files.length} (${successful} success, ${failed} failed)`,
+        )
+
         // Small delay to avoid hitting rate limits
         if (processed < files.length) {
-          await new Promise(resolve => setTimeout(resolve, 6000)) // 6 second delay
+          await new Promise((resolve) => setTimeout(resolve, 6000)) // 6 second delay
         }
       }
 
       // Longer delay between batches
       if (i + batchSize < files.length) {
         console.log('⏳ Waiting 6 seconds before next batch...')
-        await new Promise(resolve => setTimeout(resolve, 6000)) // 6 second delay
+        await new Promise((resolve) => setTimeout(resolve, 6000)) // 6 second delay
       }
     }
 
     console.log(`\n🎉 Batch transcription complete!`)
-    console.log(`📊 Final results: ${successful} successful, ${failed} failed out of ${processed} total`)
+    console.log(
+      `📊 Final results: ${successful} successful, ${failed} failed out of ${processed} total`,
+    )
 
     return {
       processed,
       successful,
       failed,
-      results
+      results,
     }
   }
 
@@ -195,13 +196,13 @@ Please provide the transcription as plain text.`
     let query = this.db('document_files as df')
       .join('documents as d', 'df.document_id', 'd.id')
       .select(
-        'df.id', 
-        'df.file_path', 
-        'df.part_number', 
-        'd.document_key', 
-        'd.type', 
+        'df.id',
+        'df.file_path',
+        'df.part_number',
+        'd.document_key',
+        'd.type',
         'd.date',
-        'df.transcription_status'
+        'df.transcription_status',
       )
       .where('df.transcription_status', 'pending')
 
@@ -222,15 +223,15 @@ Please provide the transcription as plain text.`
       .groupBy('transcription_status')
 
     const total = await this.db('document_files').count('* as count').first()
-    
+
     const result = {
       total: total.count,
       pending: 0,
       completed: 0,
-      failed: 0
+      failed: 0,
     }
 
-    stats.forEach(stat => {
+    stats.forEach((stat) => {
       result[stat.transcription_status] = parseInt(stat.count)
     })
 
@@ -241,17 +242,18 @@ Please provide the transcription as plain text.`
   async transcribeFolder(folderPath, filePattern = '*.pdf') {
     try {
       console.log(`📁 Scanning folder: ${folderPath}`)
-      
+
       if (!fs.existsSync(folderPath)) {
         throw new Error(`Folder not found: ${folderPath}`)
       }
 
       // Get all PDF files in folder
-      const files = fs.readdirSync(folderPath)
-        .filter(file => file.toLowerCase().endsWith('.pdf'))
-        .map(file => ({
+      const files = fs
+        .readdirSync(folderPath)
+        .filter((file) => file.toLowerCase().endsWith('.pdf'))
+        .map((file) => ({
           name: file,
-          path: path.join(folderPath, file)
+          path: path.join(folderPath, file),
         }))
 
       if (files.length === 0) {
@@ -268,23 +270,23 @@ Please provide the transcription as plain text.`
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
         console.log(`\n📄 Processing ${i + 1}/${files.length}: ${file.name}`)
-        
+
         const result = await this.transcribeFile(file.path, null, file.name)
         results.push({
           ...result,
           fileName: file.name,
-          filePath: file.path
+          filePath: file.path,
         })
 
         if (result.success) {
           successful++
-          
+
           // Save transcription to text file
           const outputDir = path.join(folderPath, 'transcriptions')
           if (!fs.existsSync(outputDir)) {
             fs.mkdirSync(outputDir, { recursive: true })
           }
-          
+
           const outputFile = path.join(outputDir, file.name.replace('.pdf', '.txt'))
           fs.writeFileSync(outputFile, result.transcription)
           console.log(`💾 Saved transcription: ${outputFile}`)
@@ -294,20 +296,21 @@ Please provide the transcription as plain text.`
 
         // Rate limiting delay
         if (i < files.length - 1) {
-          await new Promise(resolve => setTimeout(resolve, 2000)) // 2 second delay
+          await new Promise((resolve) => setTimeout(resolve, 2000)) // 2 second delay
         }
       }
 
       console.log(`\n🎉 Folder transcription complete!`)
-      console.log(`📊 Results: ${successful} successful, ${failed} failed out of ${files.length} total`)
+      console.log(
+        `📊 Results: ${successful} successful, ${failed} failed out of ${files.length} total`,
+      )
 
       return {
         processed: files.length,
         successful,
         failed,
-        results
+        results,
       }
-
     } catch (error) {
       console.error('❌ Error transcribing folder:', error.message)
       throw error
@@ -362,10 +365,10 @@ async function main() {
       case 'transcribe-batch':
         const batchSize = arg1 ? parseInt(arg1) : 10
         const typeFilter = arg2 || 'wartime_letters'
-        
+
         console.log(`Getting ${batchSize} pending ${typeFilter} files...`)
         const files = await manager.getPendingFiles(batchSize, typeFilter)
-        
+
         if (files.length === 0) {
           console.log('No pending files found')
           break
@@ -386,7 +389,6 @@ async function main() {
         console.log('  node gemini-transcriber.js transcribe-folder ./poep-wartime')
         console.log('  node gemini-transcriber.js transcribe-batch 10 wartime_letters')
     }
-
   } catch (error) {
     console.error('Error:', error.message)
   } finally {

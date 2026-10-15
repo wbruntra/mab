@@ -23,7 +23,6 @@ CREATE TABLE document_files (
 const { Model } = require('objection')
 const knex = require('../db')
 
-
 // Initialize knex connection for all models
 if (!Model.knex()) {
   Model.knex(knex)
@@ -33,7 +32,6 @@ class DocumentFiles extends Model {
   static get tableName() {
     return 'document_files'
   }
-  
 
   // TODO: Add jsonSchema based on DDL above
   // TODO: Add relationMappings if needed

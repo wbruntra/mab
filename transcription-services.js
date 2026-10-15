@@ -1,4 +1,4 @@
-const { GoogleGenAI } = require("@google/genai")
+const { GoogleGenAI } = require('@google/genai')
 const OpenAI = require('openai')
 const fs = require('fs')
 const secrets = require('./secrets.js')
@@ -17,11 +17,12 @@ class BaseTranscriptionService {
 
   async isRetryableError(error) {
     // Default implementation - can be overridden by services
-    return error.message && (
-      error.message.includes('RESOURCE_EXHAUSTED') ||
-      error.message.includes('429') ||
-      error.message.includes('quota') ||
-      error.message.includes('rate limit')
+    return (
+      error.message &&
+      (error.message.includes('RESOURCE_EXHAUSTED') ||
+        error.message.includes('429') ||
+        error.message.includes('quota') ||
+        error.message.includes('rate limit'))
     )
   }
 }
@@ -48,7 +49,7 @@ class GeminiTranscriptionService extends BaseTranscriptionService {
 
     // Prepare content for Gemini
     const contents = [
-      { 
+      {
         text: `Please transcribe all the text content from this wartime letter/document page. 
 
 INSTRUCTIONS:
@@ -58,20 +59,20 @@ INSTRUCTIONS:
 - Return only the transcribed text without any additional commentary or formatting markers
 - If the page appears to be blank or contains no readable text, respond with "[blank page]"
 
-Please provide the transcription as plain text.`
+Please provide the transcription as plain text.`,
       },
       {
         inlineData: {
           mimeType: 'application/pdf',
-          data: base64Data
-        }
-      }
+          data: base64Data,
+        },
+      },
     ]
 
     // Generate transcription
     const response = await this.ai.models.generateContent({
       model: this.model,
-      contents: contents
+      contents: contents,
     })
 
     const transcription = response.text.trim()
@@ -82,8 +83,8 @@ Please provide the transcription as plain text.`
         service: this.name,
         model: this.model,
         transcribed_at: new Date().toISOString(),
-        characters: transcription.length
-      }
+        characters: transcription.length,
+      },
     }
   }
 }
@@ -146,19 +147,20 @@ Please provide the transcription as plain text.`,
         service: this.name,
         model: this.model,
         transcribed_at: new Date().toISOString(),
-        characters: transcription.length
-      }
+        characters: transcription.length,
+      },
     }
   }
 
   async isRetryableError(error) {
     // OpenAI specific retry logic
-    return error.message && (
-      error.message.includes('rate_limit_exceeded') ||
-      error.message.includes('429') ||
-      error.message.includes('quota') ||
-      error.message.includes('insufficient_quota') ||
-      error.message.includes('overloaded')
+    return (
+      error.message &&
+      (error.message.includes('rate_limit_exceeded') ||
+        error.message.includes('429') ||
+        error.message.includes('quota') ||
+        error.message.includes('insufficient_quota') ||
+        error.message.includes('overloaded'))
     )
   }
 }
@@ -189,5 +191,5 @@ module.exports = {
   GeminiTranscriptionService,
   OpenAITranscriptionService,
   createTranscriptionService,
-  getAvailableServices
+  getAvailableServices,
 }

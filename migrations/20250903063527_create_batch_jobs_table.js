@@ -2,8 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.up = function(knex) {
-  return knex.schema.createTable('batch_jobs', function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable('batch_jobs', function (table) {
     table.increments('id').primary()
     table.string('batch_id').unique().notNullable()
     table.string('input_file_id').nullable()
@@ -22,7 +22,7 @@ exports.up = function(knex) {
     table.datetime('processed_at').nullable()
     table.timestamps(true, true) // created_at, updated_at
     table.text('error_message').nullable()
-    
+
     // Indexes
     table.index(['status'])
     table.index(['submitted_at'])
@@ -35,6 +35,6 @@ exports.up = function(knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTableIfExists('batch_jobs')
 }

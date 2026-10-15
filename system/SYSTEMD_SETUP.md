@@ -21,12 +21,14 @@ No PM2, no nginx hacks, no Lua modules required.
 ## Installation Steps
 
 ### Step 1: Stop PM2 (if running)
+
 ```bash
 pm2 delete mab-api-server
 pm2 save
 ```
 
 ### Step 2: Install systemd units
+
 ```bash
 cd /home/william/workspace/mab/system
 
@@ -37,18 +39,21 @@ sudo systemctl daemon-reload
 ```
 
 ### Step 3: Enable and start the socket
+
 ```bash
 sudo systemctl enable mab-api.socket
 sudo systemctl start mab-api.socket
 ```
 
 Verify the socket is listening:
+
 ```bash
 sudo systemctl status mab-api.socket
 sudo ss -tlnp | grep 8404
 ```
 
 ### Step 4: Update nginx config
+
 ```bash
 sudo cp nginx-sites.conf /etc/nginx/sites-available/maryalice.bruntrager.win
 sudo nginx -t
@@ -58,24 +63,28 @@ sudo systemctl reload nginx
 ### Step 5: Test the setup
 
 **Test 1: Socket is listening**
+
 ```bash
 sudo systemctl status mab-api.socket
 # Should show: Active: active (listening)
 ```
 
 **Test 2: Service is NOT running yet**
+
 ```bash
 sudo systemctl status mab-api.service
 # Should show: Active: inactive (dead)
 ```
 
 **Test 3: Make first request**
+
 ```bash
 curl http://localhost:8404/api/auth/status
 # Service should start automatically
 ```
 
 **Test 4: Verify service started**
+
 ```bash
 sudo systemctl status mab-api.service
 # Should show: Active: active (running)
@@ -83,6 +92,7 @@ sudo systemctl status mab-api.service
 
 **Test 5: Trigger idle exit**
 For quick testing with 1-minute timeout:
+
 ```bash
 # Modify the service temporarily
 sudo systemctl edit mab-api.service --full
@@ -98,12 +108,14 @@ sudo systemctl status mab-api.service
 ```
 
 Or use the debug endpoint:
+
 ```bash
 curl -X POST http://localhost:8404/api/debug/exit
 # Service should exit cleanly
 ```
 
 **Test 6: Verify auto-restart on next request**
+
 ```bash
 # Make another request
 curl http://localhost:8404/api/auth/status
@@ -122,21 +134,25 @@ curl http://localhost:8404/api/auth/status
 ## Monitoring & Logs
 
 **View service logs:**
+
 ```bash
 sudo journalctl -u mab-api.service -f
 ```
 
 **View socket logs:**
+
 ```bash
 sudo journalctl -u mab-api.socket -f
 ```
 
 **Check if service is running:**
+
 ```bash
 systemctl is-active mab-api.service
 ```
 
 **Check socket status:**
+
 ```bash
 systemctl is-active mab-api.socket
 ```
@@ -146,11 +162,13 @@ systemctl is-active mab-api.socket
 ### Adjust Idle Timeout
 
 Edit [api-server.js](../api-server.js):
+
 ```javascript
 const IDLE_TIMEOUT_MS = parseInt(process.env.IDLE_TIMEOUT_MS || '1800000') // 30 minutes
 ```
 
 Or set via systemd service file:
+
 ```bash
 sudo systemctl edit mab-api.service --full
 # Add/modify Environment line:
@@ -163,6 +181,7 @@ sudo systemctl daemon-reload
 ### Change Port
 
 Edit both [system/mab-api.socket](mab-api.socket) and [system/mab-api.service](mab-api.service):
+
 ```
 # In mab-api.socket:
 ListenStream=<new-port>
@@ -172,6 +191,7 @@ Environment=PORT=<new-port>
 ```
 
 Then reload:
+
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl restart mab-api.socket
@@ -180,12 +200,14 @@ sudo systemctl restart mab-api.socket
 ## Troubleshooting
 
 **Socket not listening:**
+
 ```bash
 sudo systemctl status mab-api.socket
 sudo journalctl -u mab-api.socket -n 50
 ```
 
 **Service fails to start:**
+
 ```bash
 sudo journalctl -u mab-api.service -n 50
 # Check Bun path is correct:
@@ -194,6 +216,7 @@ which bun
 ```
 
 **Port already in use:**
+
 ```bash
 sudo ss -tlnp | grep 8404
 # Kill the process using the port
@@ -202,11 +225,13 @@ sudo systemctl stop mab-api.service
 ```
 
 **App doesn't exit when idle:**
+
 - Check logs: `sudo journalctl -u mab-api.service -f`
 - Verify idle logic in api-server.js is running
 - Check for stuck in-flight requests
 
 **Socket activation not working:**
+
 ```bash
 # Verify StandardInput=socket in service file
 sudo systemctl cat mab-api.service | grep StandardInput
@@ -229,6 +254,7 @@ No changes needed to the basic pattern!
 ## Reverting to PM2
 
 If you need to go back:
+
 ```bash
 sudo systemctl stop mab-api.socket
 sudo systemctl disable mab-api.socket

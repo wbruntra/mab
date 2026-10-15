@@ -36,9 +36,7 @@ class BatchJobDB {
   async updateBatchJob(batchId, updates) {
     try {
       const updateData = { ...updates, updated_at: new Date() }
-      await this.db('batch_jobs')
-        .where('batch_id', batchId)
-        .update(updateData)
+      await this.db('batch_jobs').where('batch_id', batchId).update(updateData)
     } catch (error) {
       console.error(`Error updating batch job ${batchId}:`, error.message)
       throw error
@@ -101,9 +99,9 @@ class BatchJobDB {
   }
 
   async markAsProcessingFailed(batchId, errorMessage) {
-    await this.updateBatchJob(batchId, { 
+    await this.updateBatchJob(batchId, {
       status: 'processing_failed',
-      error_message: errorMessage 
+      error_message: errorMessage,
     })
   }
 }
@@ -119,11 +117,11 @@ class BatchProcessor {
 
   async createBatchFile(requests, options = {}) {
     const { filePrefix = 'batch', model = 'gpt-4o', reasoningLevel = 'low' } = options
-    
+
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
     const filename = `${filePrefix}-${timestamp}.jsonl`
     const filePath = path.join(__dirname, 'batch-files', filename)
-    
+
     // Ensure directory exists
     const dir = path.dirname(filePath)
     if (!fs.existsSync(dir)) {
@@ -131,20 +129,24 @@ class BatchProcessor {
     }
 
     // Create JSONL content
-    const jsonlContent = requests.map(request => JSON.stringify({
-      custom_id: request.custom_id,
-      method: 'POST',
-      url: '/v1/responses',
-      body: {
-        model,
-        reasoning_level: reasoningLevel,
-        input: request.input
-      }
-    })).join('\n')
+    const jsonlContent = requests
+      .map((request) =>
+        JSON.stringify({
+          custom_id: request.custom_id,
+          method: 'POST',
+          url: '/v1/responses',
+          body: {
+            model,
+            reasoning_level: reasoningLevel,
+            input: request.input,
+          },
+        }),
+      )
+      .join('\n')
 
     fs.writeFileSync(filePath, jsonlContent)
     console.log(`Created batch file: ${filePath} (${requests.length} requests)`)
-    
+
     return filePath
   }
 
@@ -153,7 +155,7 @@ class BatchProcessor {
       // Upload file
       const file = await this.openai.files.create({
         file: fs.createReadStream(filePath),
-        purpose: 'batch'
+        purpose: 'batch',
       })
 
       // Create batch
@@ -161,14 +163,14 @@ class BatchProcessor {
         input_file_id: file.id,
         endpoint: '/v1/responses',
         completion_window: '24h',
-        metadata: options.metadata || {}
+        metadata: options.metadata || {},
       })
 
       return {
         batch_id: batch.id,
         file_id: file.id,
         status: batch.status,
-        request_count: batch.request_counts?.total || 0
+        request_count: batch.request_counts?.total || 0,
       }
     } catch (error) {
       console.error('Error submitting batch:', error.message)
@@ -178,18 +180,18 @@ class BatchProcessor {
 
   async checkBatchStatuses(batchIds = null) {
     try {
-      const jobs = batchIds 
-        ? await Promise.all(batchIds.map(id => this.batchJobDB.getBatchJob(id)))
+      const jobs = batchIds
+        ? await Promise.all(batchIds.map((id) => this.batchJobDB.getBatchJob(id)))
         : await this.batchJobDB.getPendingJobs()
 
       for (const job of jobs.filter(Boolean)) {
         try {
           const batch = await this.openai.batches.retrieve(job.batch_id)
-          
+
           const updates = {
             status: batch.status,
             request_count_completed: batch.request_counts?.completed || 0,
-            request_count_failed: batch.request_counts?.failed || 0
+            request_count_failed: batch.request_counts?.failed || 0,
           }
 
           if (batch.status === 'completed') {
@@ -225,17 +227,20 @@ class BatchProcessor {
           // Download results
           const outputFile = await this.openai.files.content(job.output_file_id)
           const outputText = await outputFile.text()
-          
-          const results = outputText.trim().split('\n').map(line => JSON.parse(line))
-          
+
+          const results = outputText
+            .trim()
+            .split('\n')
+            .map((line) => JSON.parse(line))
+
           for (const result of results) {
             if (result.response?.body?.output_text) {
               const processResult = await resultProcessor(
                 result.response.body.output_text,
                 result.custom_id,
-                job
+                job,
               )
-              
+
               if (processResult.success) {
                 totalProcessed += processResult.count || 1
               }
@@ -244,7 +249,6 @@ class BatchProcessor {
 
           await this.batchJobDB.markAsProcessed(job.batch_id)
           console.log(`Processed batch ${job.batch_id}`)
-          
         } catch (error) {
           console.error(`Error processing batch ${job.batch_id}:`, error.message)
           await this.batchJobDB.markAsProcessingFailed(job.batch_id, error.message)
@@ -271,27 +275,31 @@ function chunkArray(array, chunkSize) {
 function createBatchRequests(dataChunks, promptGenerator, options = {}) {
   const { customIdPrefix = 'req', itemsPerRequest = 1 } = options
   const requests = []
-  
+
   let requestIndex = 0
   for (const chunk of dataChunks) {
     // Split chunk into smaller groups if needed
     const itemGroups = chunkArray(chunk, itemsPerRequest)
-    
+
     for (const items of itemGroups) {
       requests.push({
         custom_id: `${customIdPrefix}-${requestIndex}`,
-        input: [{
-          role: 'user',
-          content: [{
-            type: 'input_text',
-            text: promptGenerator(items)
-          }]
-        }]
+        input: [
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'input_text',
+                text: promptGenerator(items),
+              },
+            ],
+          },
+        ],
       })
       requestIndex++
     }
   }
-  
+
   return requests
 }
 
@@ -299,5 +307,5 @@ module.exports = {
   BatchJobDB,
   BatchProcessor,
   chunkArray,
-  createBatchRequests
+  createBatchRequests,
 }

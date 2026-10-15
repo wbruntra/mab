@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const checkAuth = async () => {
     try {
       const response = await fetch('/api/auth/status', {
-        credentials: 'include'
+        credentials: 'include',
       })
       const data = await response.json()
       setIsAuthenticated(data.authenticated)
@@ -39,10 +39,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({ password })
+        body: JSON.stringify({ password }),
       })
 
       if (response.ok) {
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       await fetch('/api/auth/logout', {
         method: 'POST',
-        credentials: 'include'
+        credentials: 'include',
       })
     } catch (error) {
       console.error('Logout failed:', error)
@@ -75,13 +75,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{
-      isAuthenticated,
-      login,
-      logout,
-      checkAuth,
-      loading
-    }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+        checkAuth,
+        loading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )

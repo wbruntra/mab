@@ -25,7 +25,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navigation h1 {
@@ -39,7 +39,7 @@ body {
 }
 
 .nav-buttons button {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border: none;
   color: white;
   padding: 0.5rem 1rem;
@@ -50,11 +50,11 @@ body {
 }
 
 .nav-buttons button:hover {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .nav-buttons button.active {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   color: #333;
 }
 
@@ -102,7 +102,7 @@ body {
   background: white;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.2s;
 }
@@ -126,7 +126,7 @@ body {
 }
 
 .stat-card.completion .stat-value {
-  color: #4CAF50;
+  color: #4caf50;
 }
 
 .progress-bar {
@@ -140,7 +140,7 @@ body {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4CAF50, #45a049);
+  background: linear-gradient(90deg, #4caf50, #45a049);
   transition: width 0.3s ease;
 }
 
@@ -164,7 +164,7 @@ body {
 
 .action-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Documents view */
@@ -182,7 +182,7 @@ body {
   background: white;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.2s;
   border-left: 4px solid #e0e0e0;
@@ -190,15 +190,15 @@ body {
 
 .document-item:hover {
   transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .document-item.completed {
-  border-left-color: #4CAF50;
+  border-left-color: #4caf50;
 }
 
 .document-item.partial {
-  border-left-color: #FF9800;
+  border-left-color: #ff9800;
 }
 
 .document-item.pending {
@@ -315,7 +315,7 @@ body {
   background: white;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
 }
 
@@ -371,7 +371,7 @@ body {
 .file-item {
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -407,23 +407,23 @@ body {
     gap: 1rem;
     text-align: center;
   }
-  
+
   .main-content {
     padding: 1rem;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .search-bar {
     flex-direction: column;
   }
-  
+
   .quick-actions {
     flex-direction: column;
   }
-  
+
   .document-header,
   .document-info,
   .result-header,

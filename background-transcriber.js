@@ -16,7 +16,7 @@ class BackgroundTranscriber {
       totalSuccessful: 0,
       totalFailed: 0,
       sessionStarted: new Date(),
-      lastBatchTime: null
+      lastBatchTime: null,
     }
   }
 
@@ -24,7 +24,7 @@ class BackgroundTranscriber {
     const timestamp = new Date().toISOString()
     const logMessage = `[${timestamp}] ${message}`
     console.log(logMessage)
-    
+
     // Append to log file
     fs.appendFileSync(this.logFile, logMessage + '\n')
   }
@@ -62,9 +62,9 @@ class BackgroundTranscriber {
   async processBatch() {
     try {
       this.log(`🔍 Looking for ${this.batchSize} pending files...`)
-      
+
       const files = await this.manager.getPendingFiles(this.batchSize, 'wartime_letters')
-      
+
       if (files.length === 0) {
         this.log(`✅ No more pending files found. All transcriptions complete!`)
         return { completed: true, processed: 0 }
@@ -79,14 +79,16 @@ class BackgroundTranscriber {
 
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
-        
+
         try {
-          this.log(`📄 Processing ${i + 1}/${files.length}: ${file.document_key} part ${file.part_number}`)
-          
+          this.log(
+            `📄 Processing ${i + 1}/${files.length}: ${file.document_key} part ${file.part_number}`,
+          )
+
           const result = await this.manager.transcribeFile(
             file.file_path,
             file.id,
-            file.document_key
+            file.document_key,
           )
 
           if (result.success) {
@@ -98,7 +100,6 @@ class BackgroundTranscriber {
             this.stats.totalFailed++
             this.log(`❌ Failed: ${result.error}`)
           }
-
         } catch (error) {
           batchFailed++
           this.stats.totalFailed++
@@ -109,24 +110,25 @@ class BackgroundTranscriber {
 
         // Progress update
         const totalProgress = this.stats.totalProcessed
-        this.log(`📊 Session progress: ${totalProgress} total (${this.stats.totalSuccessful} success, ${this.stats.totalFailed} failed)`)
+        this.log(
+          `📊 Session progress: ${totalProgress} total (${this.stats.totalSuccessful} success, ${this.stats.totalFailed} failed)`,
+        )
 
         // Delay between files (except for the last one)
         if (i < files.length - 1) {
           this.log(`⏳ Waiting ${this.delayBetweenFiles / 1000}s before next file...`)
-          await new Promise(resolve => setTimeout(resolve, this.delayBetweenFiles))
+          await new Promise((resolve) => setTimeout(resolve, this.delayBetweenFiles))
         }
       }
 
       this.log(`🎯 Batch complete: ${batchSuccessful} successful, ${batchFailed} failed`)
-      
-      return { 
-        completed: false, 
+
+      return {
+        completed: false,
         processed: files.length,
         successful: batchSuccessful,
-        failed: batchFailed
+        failed: batchFailed,
       }
-
     } catch (error) {
       this.log(`❌ Error processing batch: ${error.message}`)
       return { completed: false, processed: 0, error: error.message }
@@ -147,7 +149,7 @@ class BackgroundTranscriber {
       await this.getInitialStats()
 
       let batchCount = 0
-      
+
       while (this.isRunning) {
         batchCount++
         this.log(`\n🚀 Starting batch #${batchCount}`)
@@ -168,16 +170,17 @@ class BackgroundTranscriber {
         // Get updated stats
         const currentStats = await this.manager.getStats()
         if (currentStats) {
-          this.log(`📈 Current statistics: ${currentStats.completed} completed, ${currentStats.pending} pending, ${currentStats.failed} failed`)
+          this.log(
+            `📈 Current statistics: ${currentStats.completed} completed, ${currentStats.pending} pending, ${currentStats.failed} failed`,
+          )
         }
 
         // Wait before next batch
         if (this.isRunning) {
           this.log(`⏳ Waiting ${this.delayBetweenBatches / 1000}s before next batch...`)
-          await new Promise(resolve => setTimeout(resolve, this.delayBetweenBatches))
+          await new Promise((resolve) => setTimeout(resolve, this.delayBetweenBatches))
         }
       }
-
     } catch (error) {
       this.log(`💥 Fatal error in background transcriber: ${error.message}`)
     } finally {
@@ -194,7 +197,7 @@ class BackgroundTranscriber {
   async cleanup() {
     try {
       this.log(`🧹 Cleaning up background transcriber...`)
-      
+
       // Log final statistics
       const sessionDuration = (new Date() - this.stats.sessionStarted) / 1000
       this.log(`📊 Session summary:`)
@@ -202,7 +205,9 @@ class BackgroundTranscriber {
       this.log(`   Total processed: ${this.stats.totalProcessed}`)
       this.log(`   Total successful: ${this.stats.totalSuccessful}`)
       this.log(`   Total failed: ${this.stats.totalFailed}`)
-      this.log(`   Success rate: ${this.stats.totalProcessed > 0 ? Math.round((this.stats.totalSuccessful / this.stats.totalProcessed) * 100) : 0}%`)
+      this.log(
+        `   Success rate: ${this.stats.totalProcessed > 0 ? Math.round((this.stats.totalSuccessful / this.stats.totalProcessed) * 100) : 0}%`,
+      )
 
       await this.manager.close()
       this.log(`✅ Background transcriber stopped cleanly`)
@@ -236,15 +241,14 @@ class BackgroundTranscriber {
 // Main execution
 async function main() {
   const transcriber = new BackgroundTranscriber()
-  
+
   try {
     // Setup signal handlers for graceful shutdown
     transcriber.setupSignalHandlers()
-    
+
     // Initialize and run
     await transcriber.init()
     await transcriber.run()
-    
   } catch (error) {
     console.error('Failed to start background transcriber:', error.message)
     process.exit(1)

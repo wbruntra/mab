@@ -1,0 +1,5 @@
+batch-files/
+vite-client/dist/
+*.log
+bun.lock
+package-lock.json

@@ -5,12 +5,14 @@ This directory contains background services for processing transcriptions and ge
 ## Services
 
 ### 1. Background Transcriber (`background-transcriber.js`)
+
 - Continuously processes pending PDF files for transcription
 - Uses OpenAI service for accurate transcription
 - Processes files in batches of 20 with proper rate limiting
 - Automatically handles retries and error recovery
 
 ### 2. Background Summarizer (`background-summarizer.js`)
+
 - Continuously generates summaries for completed documents
 - Uses OpenAI GPT models for intelligent summarization
 - Processes documents in batches of 10 with appropriate delays
@@ -19,6 +21,7 @@ This directory contains background services for processing transcriptions and ge
 ## Quick Start
 
 ### Prerequisites
+
 ```bash
 # Install PM2 globally if not already installed
 npm install -g pm2
@@ -28,6 +31,7 @@ npm install
 ```
 
 ### Start Services
+
 ```bash
 # Start both services
 ./monitor.sh start-both
@@ -38,6 +42,7 @@ npm install
 ```
 
 ### Monitor Progress
+
 ```bash
 # Show status and recent activity
 ./monitor.sh status
@@ -51,6 +56,7 @@ pm2 monit
 ```
 
 ### Stop Services
+
 ```bash
 # Stop both services
 ./monitor.sh stop-both
@@ -63,20 +69,23 @@ pm2 monit
 ## Log Files
 
 ### Application Logs
+
 - `transcription-background.log` - Detailed transcriber activity
 - `summarizer-background.log` - Detailed summarizer activity
 
 ### PM2 Logs (in `logs/` directory)
+
 - `transcriber-combined.log` - Combined transcriber output
 - `transcriber-out.log` - Standard output
 - `transcriber-error.log` - Error output
 - `summarizer-combined.log` - Combined summarizer output
-- `summarizer-out.log` - Standard output  
+- `summarizer-out.log` - Standard output
 - `summarizer-error.log` - Error output
 
 ## Configuration
 
 ### Transcriber Settings
+
 - **Service**: OpenAI
 - **Batch Size**: 20 files
 - **Delay Between Batches**: 30 seconds
@@ -84,6 +93,7 @@ pm2 monit
 - **Target**: `wartime_letters` type documents
 
 ### Summarizer Settings
+
 - **Service**: OpenAI GPT
 - **Batch Size**: 10 documents
 - **Delay Between Batches**: 45 seconds
@@ -135,6 +145,7 @@ pm2 delete mab-transcriber       # Remove from PM2
    - Adjust `max_memory_restart` in ecosystem config if needed
 
 ### Service Recovery
+
 - Services automatically restart on crashes
 - Graceful shutdown handles SIGINT/SIGTERM signals
 - Progress is logged continuously for recovery tracking
@@ -142,11 +153,13 @@ pm2 delete mab-transcriber       # Remove from PM2
 ## Performance Expectations
 
 ### Transcription Service
+
 - **Rate**: ~3-4 files per minute (with rate limiting)
 - **API Calls**: ~1 per file
 - **Typical Session**: 100 files = ~25-30 minutes
 
-### Summarizer Service  
+### Summarizer Service
+
 - **Rate**: ~4-5 documents per minute (with rate limiting)
 - **API Calls**: ~1 per document
 - **Typical Session**: 50 documents = ~12-15 minutes
@@ -154,6 +167,7 @@ pm2 delete mab-transcriber       # Remove from PM2
 ## Statistics Monitoring
 
 The monitor script provides real-time statistics including:
+
 - Total files vs completed transcriptions
 - Documents with summaries vs total documents
 - Recent activity from both services
@@ -162,6 +176,7 @@ The monitor script provides real-time statistics including:
 ## Auto-Completion Detection
 
 Both services automatically detect when all work is complete:
+
 - **Transcriber**: Stops when no pending files remain
 - **Summarizer**: Stops when no documents need summaries
 

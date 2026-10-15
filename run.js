@@ -19,14 +19,14 @@ const run = async () => {
     }
 
     console.log('Processing PDF file with OpenAI...')
-    
+
     // Read the PDF file and convert to base64
     const pdfBuffer = fs.readFileSync(filePath)
     const base64Pdf = pdfBuffer.toString('base64')
 
     // Create a response using the newer API format
     console.log('Extracting text from PDF...')
-    
+
     const response = await openai.responses.create({
       model: 'gpt-5',
       input: [
@@ -48,16 +48,15 @@ const run = async () => {
     })
 
     const extractedText = response.output_text
-    
+
     // Save the extracted text to a file
     const outputPath = path.join(__dirname, 'output', 'extracted_text.txt')
     fs.writeFileSync(outputPath, extractedText)
-    
+
     console.log('Text extraction completed!')
     console.log('Extracted text saved to:', outputPath)
     console.log('\n--- Extracted Text Preview ---')
     console.log(extractedText.substring(0, 500) + (extractedText.length > 500 ? '...' : ''))
-
   } catch (error) {
     console.error('Error:', error.message)
     if (error.response) {
@@ -68,4 +67,3 @@ const run = async () => {
 }
 
 run()
-

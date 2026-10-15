@@ -12,7 +12,10 @@ export const AuthGuard = ({ children }: AuthGuardProps) => {
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: '100vh' }}
+      >
         <div className="text-center">
           <div className="spinner-border text-primary mb-3" role="status">
             <span className="visually-hidden">Loading...</span>
